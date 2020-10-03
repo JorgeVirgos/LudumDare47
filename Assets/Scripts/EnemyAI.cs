@@ -13,7 +13,7 @@ public class EnemyAI : MonoBehaviour
     public float AttackDistance = 10.0f;
     private Weapon CurrentWeapon;
     private bool shoot;
-
+    public float HP = 100f;
 
     private void Start()
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour {
+public class Weapon : InventoryItem {
 
   public GameObject Projectile;
   public float ShotCooldown = 0.0f;

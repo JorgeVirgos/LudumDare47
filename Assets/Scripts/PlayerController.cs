@@ -15,8 +15,9 @@ public class PlayerController : MonoBehaviour {
   public Camera FPSCamera;
   public KeyCode InteractKey = KeyCode.E;
   public KeyCode ReloadKey = KeyCode.R;
-  public Weapon CurrentWeapon;
 
+  private InventorySystem Inventory;
+  private Weapon CurrentWeapon;
   private float horizontalInput;
   private float verticalInput;
   private Rigidbody playerRB;
@@ -32,6 +33,20 @@ public class PlayerController : MonoBehaviour {
     Cursor.visible = false;
     Cursor.lockState = CursorLockMode.Locked;
 
+    Inventory = (InventorySystem)Object.FindObjectOfType(typeof(InventorySystem));
+    CurrentWeapon = (Weapon)Object.FindObjectOfType(typeof(Pistol));
+    /*if(!Inventory) {
+      Instantiate();
+    }*/
+  }
+
+  void SwapWeapon(int weaponIndex) {
+    InventoryItem Item = Inventory.GetInventoryItemByIndex(InventoryItem.ItemType.kItemTypeWeapon, weaponIndex);
+      if (Item) {
+        CurrentWeapon.gameObject.SetActive(false);
+        CurrentWeapon = (Weapon)Item;
+        CurrentWeapon.gameObject.SetActive(true);
+      }
   }
 
   // Update is called once per frame
@@ -64,6 +79,14 @@ public class PlayerController : MonoBehaviour {
       CurrentWeapon.Shoot();
     } else {
       CurrentWeapon.bIsShooting = false;
+    }
+
+    if (Input.GetKey(KeyCode.Q)) {
+      SwapWeapon(0);
+    }
+
+    if (Input.GetKey(KeyCode.T)) {
+      SwapWeapon(1);
     }
 
     if (Input.GetKey(ReloadKey)) {

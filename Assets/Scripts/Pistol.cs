@@ -16,7 +16,6 @@ public class Pistol : Weapon {
   // Update is called once per frame
   void Update() {
     CurrentShotCooldown -= Time.deltaTime;
-    Debug.Log(CurrentClipAmmo);
   }
 
   public override void Shoot() {

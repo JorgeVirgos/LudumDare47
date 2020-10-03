@@ -8,7 +8,7 @@ public class InventorySystem : MonoBehaviour
     public List<InventoryItem> weapons;
     private Dictionary<InventoryItem.ItemType, List<InventoryItem>> items;
 
-    internal int actualWepaonIndex = 0;
+    internal int actualWeaponIndex = 0;
 
     #region Inventory System Utility
     public List<InventoryItem> GetAllInventoryItems()
@@ -68,7 +68,7 @@ public class InventorySystem : MonoBehaviour
             return;
         }
 
-        actualWepaonIndex = newWeaponIndex;
+        actualWeaponIndex = newWeaponIndex;
 
     }
 
@@ -79,7 +79,8 @@ public class InventorySystem : MonoBehaviour
     {
         items = new Dictionary<InventoryItem.ItemType, List<InventoryItem>>();
 
-        foreach(InventoryItem weapon in weapons)
+        items.Add(InventoryItem.ItemType.kItemTypeWeapon, new List<InventoryItem>());
+        foreach (InventoryItem weapon in weapons)
         {
             weapon.isPicked = false;
             weapon.itemType = InventoryItem.ItemType.kItemTypeWeapon;

@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/AitorTest.unity
     guid: 27ed306c69078874298569b520c45e0c
   - enabled: 1
-    path: Assets/Scenes/AitorTest2.unity
-    guid: 5c49064895bd33c47a284e4ff69a5b99
+    path: Assets/Scenes/AitorTest1.unity
+    guid: f090de0a712dfe44e91eba3a6c5838c1
   m_configObjects: {}

@@ -320,7 +320,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4705682559643929582}
   - component: {fileID: 6130400793483672274}
-  m_Layer: 0
+  - component: {fileID: 81721642370190919}
+  m_Layer: 8
   m_Name: Computer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -363,7 +364,20 @@ MonoBehaviour:
   nextSceneName: AitorTest2
   shader: {fileID: 211, guid: 0000000000000000f000000000000000, type: 0}
   CameraTarget: {fileID: 4032046233985944397}
-  TransitionSpeed: 0.6
+  TransitionSpeed: 1
+--- !u!65 &81721642370190919
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4705682559643929581}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.31, y: 0.93, z: 1.6}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4705682560205650254
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,7 +576,7 @@ GameObject:
   - component: {fileID: 1179787340920909931}
   - component: {fileID: 2236220584920355372}
   - component: {fileID: 6559383422453546054}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TriggerLoadLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -599,7 +613,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7512064452287830800}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}

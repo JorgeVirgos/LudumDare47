@@ -23,4 +23,12 @@ public class BasicProjectile : MonoBehaviour {
       Destroy(gameObject);
     }
   }
+
+  void OnCollisionEnter(Collision collision) {
+    if(collision.gameObject.tag == "Projectile") return;
+    if(collision.gameObject.tag == "Enemy") {
+      // Do Damage
+    }
+    Destroy(gameObject);
+  }
 }

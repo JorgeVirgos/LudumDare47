@@ -21,13 +21,15 @@ public class Pistol : Weapon {
   public override void Shoot() {
     if(CurrentShotCooldown <= 0.0f || !bIsShooting) {
       base.Shoot();
-      Instantiate(Projectile, child.position, Quaternion.identity);
-      BasicProjectile prj = Projectile.GetComponent<BasicProjectile>();
-      if(prj) prj.ImpulseDirection = transform.parent.transform.forward;
-      CurrentShotCooldown = ShotCooldown;
-      bIsShooting = true;
-      if (CurrentClipAmmo <= 0) {
-        Reload();
+      GameObject obj = Instantiate(Projectile, child.position, Quaternion.identity);
+      if(obj) {
+        BasicProjectile prj = obj.GetComponent<BasicProjectile>();
+        if(prj) prj.ImpulseDirection = transform.parent.transform.forward;
+        CurrentShotCooldown = ShotCooldown;
+        bIsShooting = true;
+        if (CurrentClipAmmo <= 0) {
+          Reload();
+        }
       }
     }
   }

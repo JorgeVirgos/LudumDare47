@@ -37,7 +37,10 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         Inventory = GetComponent<InventorySystem>();
-        CurrentWeapon = (Weapon)Object.FindObjectOfType(typeof(Pistol));
+        InventoryItem Item = Inventory.GetInventoryItemByIndex(InventoryItem.ItemType.kItemTypeWeapon, 0);
+        if (Item) {
+          CurrentWeapon = (Weapon)Item;
+        }
         /*if(!Inventory) {
           Instantiate();
         }*/
@@ -101,6 +104,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.T))
         {
             SwapWeapon(1);
+        }
+
+        if (Input.GetKey(KeyCode.Y))
+        {
+            SwapWeapon(2);
         }
 
         if (Input.GetKey(ReloadKey))

@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 2817051722964011894}
   m_Layer: 0
   m_Name: FPSPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,6 +133,10 @@ MonoBehaviour:
   FPSCamera: {fileID: 2817051721803655770}
   InteractKey: 101
   ReloadKey: 114
+<<<<<<< Updated upstream
+=======
+  CurrentWeapon: {fileID: 8134836785228713200}
+>>>>>>> Stashed changes
 --- !u!136 &2817051722964011892
 CapsuleCollider:
   m_ObjectHideFlags: 0

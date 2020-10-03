@@ -14,10 +14,11 @@ public class PlayerController : MonoBehaviour {
   public float InteractableRaycastDistance = 100.0f;
   public Camera FPSCamera;
   public KeyCode InteractKey = KeyCode.E;
+  public KeyCode ReloadKey = KeyCode.R;
+  public Weapon CurrentWeapon;
 
   private float horizontalInput;
   private float verticalInput;
-
   private Rigidbody playerRB;
 
   // Start is called before the first frame update
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour {
 
     Cursor.visible = false;
     Cursor.lockState = CursorLockMode.Locked;
+
   }
 
   // Update is called once per frame
@@ -58,6 +60,15 @@ public class PlayerController : MonoBehaviour {
     if (Input.GetKey(KeyCode.D))
       transform.Translate(MovementFactor, 0.0f, 0.0f);
 
+    if(Input.GetAxis("Fire1") > 0.0f) {
+      CurrentWeapon.Shoot();
+    } else {
+      CurrentWeapon.bIsShooting = false;
+    }
+
+    if (Input.GetKey(ReloadKey)) {
+      CurrentWeapon.Reload();
+    }
 
     if (Input.GetKeyDown(KeyCode.Space)) {
       RaycastHit hit;

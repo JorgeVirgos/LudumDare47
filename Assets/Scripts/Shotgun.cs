@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Shotgun : Weapon {
     
-  public int NumberOfPellets = 10;
-  public float DispersionAngle = 0.5f;
-  public float DispersionDistance= 5f;
+  public int NumberOfPellets;
+  public float DispersionAngle;
+  public float DispersionDistance;
 
   private Transform child;
 

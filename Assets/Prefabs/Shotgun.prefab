@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 6605740857961799085}
   - component: {fileID: 6605740857961799084}
   - component: {fileID: 6605740857961799075}
+  - component: {fileID: 6605740857961799074}
   - component: {fileID: 9143431762390839411}
   m_Layer: 0
   m_Name: Shotgun
@@ -111,6 +112,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &6605740857961799074
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6605740857961799072}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &9143431762390839411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,7 +134,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6605740857961799072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5468b1e0b2501f64d863d9f31240307c, type: 3}
+  m_Script: {fileID: 11500000, guid: fa2acf829e056dd43a6b649b7b361a07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 0
@@ -130,6 +144,4 @@ MonoBehaviour:
   bIsShooting: 0
   MaxAmmo: 30
   MaxClipAmmo: 2
-  NumberOfPellets: 10
-  DispersionAngle: 0.5
-  DispersionDistance: 5
+  NumberOfPellets: 5

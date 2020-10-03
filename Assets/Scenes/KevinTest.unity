@@ -417,6 +417,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66dfd8cb119e4a64fa414f903fda5663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 1837158371}
-  - {fileID: 1047614845}
+  defaultWeapons:
+  - weaponItem: {fileID: 1837158371}
+    isDefault: 1
+  - weaponItem: {fileID: 1047614845}
+    isDefault: 1

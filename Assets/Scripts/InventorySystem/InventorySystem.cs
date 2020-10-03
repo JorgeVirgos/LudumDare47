@@ -5,10 +5,18 @@ using UnityEngine;
 public class InventorySystem : MonoBehaviour
 {
 
-    public List<InventoryItem> weapons;
-    private Dictionary<InventoryItem.ItemType, List<InventoryItem>> items;
+    [System.Serializable]
+    public struct DefaultWeapon
+    {
+        [SerializeField]
+        public InventoryItem weaponItem;
+        [SerializeField]
+        public bool isDefault;
+    }
 
-    internal int actualWeaponIndex = 0;
+    [SerializeField]
+    public List<DefaultWeapon> defaultWeapons;
+    private Dictionary<InventoryItem.ItemType, List<InventoryItem>> items;
 
     #region Inventory System Utility
     public List<InventoryItem> GetAllInventoryItems()
@@ -40,10 +48,12 @@ public class InventorySystem : MonoBehaviour
         return items[itemType][itemIndex];
     }
 
-    public void AddItem(InventoryItem newItem)
+    public void GrabItem(InventoryItem newItem)
     {
-        if (newItem.index > 0) { return; }
-        newItem.isPicked = true;
+        if (newItem.index > 0) {
+            newItem.isPicked = true;
+            return;
+        }
         items[newItem.itemType].Add(newItem);
         newItem.index = items[newItem.itemType].Count - 1;
     }
@@ -59,33 +69,26 @@ public class InventorySystem : MonoBehaviour
     {
         items.Clear();
     }
-
-    public void SetWeapon(int newWeaponIndex)
-    {
-
-        if (items[InventoryItem.ItemType.kItemTypeWeapon].Count >= newWeaponIndex)
-        {
-            return;
-        }
-
-        actualWeaponIndex = newWeaponIndex;
-
-    }
-
     #endregion
 
     #region Unity Logic
     public void Awake()
     {
+
         items = new Dictionary<InventoryItem.ItemType, List<InventoryItem>>();
 
-        items.Add(InventoryItem.ItemType.kItemTypeWeapon, new List<InventoryItem>());
-        foreach (InventoryItem weapon in weapons)
+        InventoryItem.ItemType[] itemTypes = System.Enum.GetValues(typeof(InventoryItem.ItemType)) as InventoryItem.ItemType[];
+        for (int i = 0; i < itemTypes.Length; i++)
         {
-            weapon.isPicked = false;
-            weapon.itemType = InventoryItem.ItemType.kItemTypeWeapon;
-            weapon.index = items[weapon.itemType].Count;
-            items[weapon.itemType].Add(weapon);
+            items.Add(itemTypes[i], new List<InventoryItem>());
+        }
+
+        foreach (DefaultWeapon defaultWeapon in defaultWeapons)
+        {
+            defaultWeapon.weaponItem.isPicked = defaultWeapon.isDefault;
+            defaultWeapon.weaponItem.itemType = InventoryItem.ItemType.kItemTypeWeapon;
+            defaultWeapon.weaponItem.index = items[defaultWeapon.weaponItem.itemType].Count;
+            items[defaultWeapon.weaponItem.itemType].Add(defaultWeapon.weaponItem);
         }
 
     }

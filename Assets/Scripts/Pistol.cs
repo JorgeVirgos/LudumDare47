@@ -24,7 +24,10 @@ public class Pistol : Weapon {
       GameObject obj = Instantiate(Projectile, child.position, Quaternion.identity);
       if(obj) {
         BasicProjectile prj = obj.GetComponent<BasicProjectile>();
-        if(prj) prj.ImpulseDirection = transform.parent.transform.forward;
+        if(prj) {
+          prj.Damage = WeaponDamage;
+          prj.ImpulseDirection = transform.parent.transform.forward;
+        }
         CurrentShotCooldown = ShotCooldown;
         bIsShooting = true;
         if (CurrentClipAmmo <= 0) {

@@ -127,6 +127,7 @@ MonoBehaviour:
   Projectile: {fileID: 3884111157583132442, guid: ced23ed13a566584c8d639b1268bd552,
     type: 3}
   ShotCooldown: 0.1
+  WeaponDamage: 3
   bIsShooting: 0
   MaxAmmo: 300
   MaxClipAmmo: 30

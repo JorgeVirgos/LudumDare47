@@ -32,6 +32,7 @@ public class Shotgun : Weapon {
         if(obj) {
           BasicProjectile prj = obj.GetComponent<BasicProjectile>();
           if(prj) {
+            prj.Damage = WeaponDamage;
             Vector3 rand = Random.onUnitSphere /*+ transform.parent.transform.position*/ + 
               (transform.parent.transform.forward * DispersionDistance);
             rand.Normalize();

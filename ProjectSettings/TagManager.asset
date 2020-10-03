@@ -11,6 +11,7 @@ TagManager:
   - shortRangeRoom
   - LongRangedRoom
   - Projectile
+  - Enemy
   layers:
   - Default
   - TransparentFX

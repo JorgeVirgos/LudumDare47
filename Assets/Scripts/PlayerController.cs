@@ -15,8 +15,9 @@ public class PlayerController : MonoBehaviour
   public float JumpRaycastDistance = 0.6f;
   public float InteractableRaycastDistance = 100.0f;
   public Camera FPSCamera;
-  public KeyCode InteractKey = KeyCode.E;
   public KeyCode ReloadKey = KeyCode.R;
+  [Range(0.01f, 1.0f)]
+  public float jumpFix = 0.05f;
 
   private InventorySystem Inventory;
   private Weapon CurrentWeapon;
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
   private float verticalInput;
   private Rigidbody playerRB;
   private Vector3 movementDir;
+  private bool shouldJump;
+  private bool isJumping;
 
   // Start is called before the first frame update
   void Start()
@@ -83,22 +86,6 @@ public class PlayerController : MonoBehaviour
 
     movementDir.Normalize();
 
-    
-    //movementDir = 
-
-    /*
-        if (Input.GetKey(KeyCode.W))
-            transform.Translate(0.0f, 0.0f, MovementFactor);
-
-        if (Input.GetKey(KeyCode.A))
-            transform.Translate(-MovementFactor, 0.0f, 0.0f);
-
-        if (Input.GetKey(KeyCode.S))
-            transform.Translate(0.0f, 0.0f, -MovementFactor);
-
-        if (Input.GetKey(KeyCode.D))
-            transform.Translate(MovementFactor, 0.0f, 0.0f);
-            */
     if (Input.GetAxis("Fire1") > 0.0f)
     {
       CurrentWeapon.Shoot();
@@ -127,35 +114,35 @@ public class PlayerController : MonoBehaviour
     {
       CurrentWeapon.Reload();
     }
-
     if (Input.GetKeyDown(KeyCode.Space))
     {
-      RaycastHit hit;
-      Ray downRay = new Ray(transform.position, -Vector3.up);
-      Physics.Raycast(downRay, out hit);
-      if (hit.distance <= JumpRaycastDistance)
-      {
-        playerRB.AddForce(new Vector3(0.0f, JumpForce, 0.0f),
-          ForceMode.Impulse);
-      }
+      shouldJump = true;
     }
-
-    RaycastHit InteractableHit;
-    Ray interactableRay = new Ray(transform.position, FPSCamera.transform.forward);
-    Physics.Raycast(interactableRay, out InteractableHit);
-    if (InteractableHit.distance <= InteractableRaycastDistance)
-    {
-      if (Input.GetKey(InteractKey))
-      {
-        // Call function
-      }
-    }
-
   }
 
   private void FixedUpdate()
   {
-    Vector3 totalForce = movementDir * PlayerSpeed * Time.fixedDeltaTime;
+    //Jump
+    RaycastHit hit;
+    // Does the ray intersect any objects excluding the player layer
+    Vector3 dir = -Vector3.up;
+    Vector3 initPos = transform.position;
+    isJumping = !Physics.Raycast(initPos, dir, out hit, JumpRaycastDistance);
+
+    if (shouldJump && !isJumping)
+    {
+      int mask = ~LayerMask.GetMask("PlayerTrigger");
+
+      if (Physics.Raycast(initPos, dir, out hit, JumpRaycastDistance, mask))
+      {
+        playerRB.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+      }
+      shouldJump = false;
+    }
+
+    // Movement
+    jumpFix = isJumping ? 0.01f : 1.0f;
+    Vector3 totalForce = movementDir * PlayerSpeed * jumpFix;
     playerRB.AddForce(totalForce, ForceMode.VelocityChange);
   }
 }

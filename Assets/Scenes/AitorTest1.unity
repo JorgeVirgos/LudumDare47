@@ -121,24 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &230044340 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2728002580156730941, guid: bf9d7dac2956c9745bae25b5cde09356,
-    type: 3}
-  m_PrefabInstance: {fileID: 1169359330}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &230044344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 230044340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 868c5e295b900ff46971bb867ed394e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &391172342
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,6 +530,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 391172343}
     m_Modifications:
+    - target: {fileID: 88979320, guid: bf9d7dac2956c9745bae25b5cde09356, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 374739902683252351, guid: bf9d7dac2956c9745bae25b5cde09356,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418245805186398333, guid: bf9d7dac2956c9745bae25b5cde09356,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426136812296886950, guid: bf9d7dac2956c9745bae25b5cde09356,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 2728002580156730929, guid: bf9d7dac2956c9745bae25b5cde09356,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -603,20 +604,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2728002580156730930, guid: bf9d7dac2956c9745bae25b5cde09356,
-        type: 3}
-      propertyPath: PlayerSpeed
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 2728002580156730941, guid: bf9d7dac2956c9745bae25b5cde09356,
         type: 3}
       propertyPath: m_Name
       value: FPSPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728002580156730941, guid: bf9d7dac2956c9745bae25b5cde09356,
-        type: 3}
-      propertyPath: m_TagString
-      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2728002580156730941, guid: bf9d7dac2956c9745bae25b5cde09356,
         type: 3}
@@ -628,18 +619,12 @@ PrefabInstance:
       propertyPath: m_TargetTexture
       value: 
       objectReference: {fileID: 8400000, guid: 6b450b634db2b374fa078269b63eb939, type: 2}
-    - target: {fileID: 2728002580218983387, guid: bf9d7dac2956c9745bae25b5cde09356,
+    - target: {fileID: 4691732824519264872, guid: bf9d7dac2956c9745bae25b5cde09356,
         type: 3}
-      propertyPath: m_TagString
-      value: Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 2728002580898435224, guid: bf9d7dac2956c9745bae25b5cde09356,
-        type: 3}
-      propertyPath: m_IsActive
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2728002580898435230, guid: bf9d7dac2956c9745bae25b5cde09356, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf9d7dac2956c9745bae25b5cde09356, type: 3}
 --- !u!4 &1169359331 stripped
 Transform:

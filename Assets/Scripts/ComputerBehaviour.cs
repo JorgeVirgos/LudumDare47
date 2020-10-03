@@ -45,7 +45,6 @@ public class ComputerBehaviour : MonoBehaviour, IInteractable
     MeshRenderer mr = transform.GetChild(0).GetComponent<MeshRenderer>();
     RenderTexture rt = nextCamera.targetTexture;
     mr.material.SetTexture("_MainTex", rt);
-
     // Disable Movement
     Player.GetComponent<PlayerController>().enabled = false;
   }
@@ -112,9 +111,12 @@ public class ComputerBehaviour : MonoBehaviour, IInteractable
     Material mat = a.GetComponent<Image>().material = new Material(shader);
     mat.mainTexture = nextCamera.targetTexture;
 
-    yield return new WaitForSeconds(1.0f);
+    // Set cursor invisible
+    Cursor.lockState = CursorLockMode.Locked;
+    Cursor.visible = false;
 
     SceneManager.UnloadSceneAsync(currentScene);
+    yield return null;
   }
 
   public void LoadNextLevel()

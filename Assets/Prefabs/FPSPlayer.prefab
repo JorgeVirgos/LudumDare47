@@ -113,13 +113,13 @@ MonoBehaviour:
   CameraSpeedY: 300
   MinCameraAngleY: -60
   MaxCameraAngleY: 60
-  PlayerSpeed: 2
+  PlayerSpeed: 2.1
   JumpForce: 150000
   JumpRaycastDistance: 1.5
   InteractableRaycastDistance: 100
   FPSCamera: {fileID: 2728002580218983385}
   ReloadKey: 114
-  jumpFix: 0.15
+  jumpFix: 0.125
 --- !u!136 &2728002580156730931
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -127,7 +127,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2728002580156730941}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 15d1541a78b2bb8468db724d03dcc873, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -431,7 +431,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 32, y: 32}
+  m_SizeDelta: {x: 16, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3694686706891205719
 CanvasRenderer:
@@ -529,7 +529,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: -2071847209
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &374739902683252351
 MonoBehaviour:

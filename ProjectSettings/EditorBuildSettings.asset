@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/_MasterScene.unity
+    guid: bc200c2d451065645a4dd0acced12ce5
+  - enabled: 1
+    path: Assets/Scenes/AitorTest.unity
+    guid: 27ed306c69078874298569b520c45e0c
+  - enabled: 1
+    path: Assets/Scenes/AitorTest2.unity
+    guid: 5c49064895bd33c47a284e4ff69a5b99
   m_configObjects: {}

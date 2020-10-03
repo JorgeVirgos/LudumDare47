@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4032046233985944397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5730159058830530389}
+  m_Layer: 0
+  m_Name: CameraTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5730159058830530389
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4032046233985944397}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.83, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4705682559643929582}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &4705682558887457347
 GameObject:
   m_ObjectHideFlags: 0
@@ -28,7 +58,7 @@ Transform:
   m_GameObject: {fileID: 4705682558887457347}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.09604815, y: 1, z: 1.8853}
+  m_LocalScale: {x: 0.09604815, y: 0.92, z: 1.65}
   m_Children: []
   m_Father: {fileID: 4705682559643929582}
   m_RootOrder: 1
@@ -213,8 +243,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4705682559401300127}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0.054, y: 0, z: 0}
-  m_LocalScale: {x: 0.185, y: 1, z: 0.096}
+  m_LocalPosition: {x: 0.05, y: 0, z: 0}
+  m_LocalScale: {x: 0.16, y: 1, z: 0.09}
   m_Children: []
   m_Father: {fileID: 4705682559643929582}
   m_RootOrder: 0
@@ -245,7 +275,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e0d1fb079d7bfad4e970f17751d7025e, type: 2}
+  - {fileID: 2100000, guid: a31c9ad46e18349468003ea8cbf7bd6c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -290,7 +320,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4705682559643929582}
   - component: {fileID: 6130400793483672274}
-  m_Layer: 0
+  - component: {fileID: 81721642370190919}
+  m_Layer: 8
   m_Name: Computer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -314,6 +345,7 @@ Transform:
   - {fileID: 4705682560302564492}
   - {fileID: 4705682560205650255}
   - {fileID: 1179787340920909931}
+  - {fileID: 5730159058830530389}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -329,7 +361,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a23b74e5a95b3648a0a8e030f4eb7a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCamera: {fileID: 0}
+  nextSceneName: AitorTest2
+  shader: {fileID: 211, guid: 0000000000000000f000000000000000, type: 0}
+  CameraTarget: {fileID: 4032046233985944397}
+  TransitionSpeed: 1
+--- !u!65 &81721642370190919
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4705682559643929581}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.31, y: 0.93, z: 1.6}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4705682560205650254
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,7 +576,7 @@ GameObject:
   - component: {fileID: 1179787340920909931}
   - component: {fileID: 2236220584920355372}
   - component: {fileID: 6559383422453546054}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TriggerLoadLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,7 +613,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7512064452287830800}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}

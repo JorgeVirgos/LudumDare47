@@ -8,6 +8,8 @@ TagManager:
   - LongRangedRoom
   - removableBox
   - shortRangeRoom
+  - Root
+  - Camera
   layers:
   - Default
   - TransparentFX
@@ -17,8 +19,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Interactable
+  - PlayerTrigger
   - 
   - 
   - 

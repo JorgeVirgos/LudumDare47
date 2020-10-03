@@ -1,14 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventorySystem : MonoBehaviour
 {
 
-    public List<InventoryItem> weapons;
+    [System.Serializable]
+    public struct DefaultWeapon
+    {
+        [SerializeField]
+        public InventoryItem weaponItem;
+        [SerializeField]
+        public bool isDefault;
+        [SerializeField]
+        public Sprite weaponSprite;
+    }
+
+    [SerializeField]
+    public GameObject canvas;
+
+    [SerializeField]
+    public GameObject weaponCanvasPrefab;
+
+    [SerializeField]
+    public List<DefaultWeapon> defaultWeapons;
     private Dictionary<InventoryItem.ItemType, List<InventoryItem>> items;
 
-    internal int actualWeaponIndex = 0;
 
     #region Inventory System Utility
     public List<InventoryItem> GetAllInventoryItems()
@@ -27,6 +45,25 @@ public class InventorySystem : MonoBehaviour
         return queriedItems;
     }
 
+    public List<InventoryItem> GetAllPickedItems()
+    {
+        List<InventoryItem> queriedItems = new List<InventoryItem>();
+
+        foreach (KeyValuePair<InventoryItem.ItemType, List<InventoryItem>> inventoryItems in items)
+        {
+            foreach (InventoryItem iteratingItem in inventoryItems.Value)
+            {
+                if (iteratingItem.isPicked)
+                {
+                    queriedItems.Add(iteratingItem);
+                }
+            }
+        }
+
+        return queriedItems;
+
+    }
+
     public List<InventoryItem> GetInventoryItemsByType(InventoryItem.ItemType queriedType)
     {
         return items[queriedType];
@@ -40,10 +77,12 @@ public class InventorySystem : MonoBehaviour
         return items[itemType][itemIndex];
     }
 
-    public void AddItem(InventoryItem newItem)
+    public void GrabItem(InventoryItem newItem)
     {
-        if (newItem.index > 0) { return; }
-        newItem.isPicked = true;
+        if (newItem.index > 0) {
+            newItem.isPicked = true;
+            return;
+        }
         items[newItem.itemType].Add(newItem);
         newItem.index = items[newItem.itemType].Count - 1;
     }
@@ -59,33 +98,36 @@ public class InventorySystem : MonoBehaviour
     {
         items.Clear();
     }
-
-    public void SetWeapon(int newWeaponIndex)
-    {
-
-        if (items[InventoryItem.ItemType.kItemTypeWeapon].Count >= newWeaponIndex)
-        {
-            return;
-        }
-
-        actualWeaponIndex = newWeaponIndex;
-
-    }
-
     #endregion
 
     #region Unity Logic
     public void Awake()
     {
+
         items = new Dictionary<InventoryItem.ItemType, List<InventoryItem>>();
 
-        items.Add(InventoryItem.ItemType.kItemTypeWeapon, new List<InventoryItem>());
-        foreach (InventoryItem weapon in weapons)
+        InventoryItem.ItemType[] itemTypes = System.Enum.GetValues(typeof(InventoryItem.ItemType)) as InventoryItem.ItemType[];
+        for (int i = 0; i < itemTypes.Length; i++)
         {
-            weapon.isPicked = false;
-            weapon.itemType = InventoryItem.ItemType.kItemTypeWeapon;
-            weapon.index = items[weapon.itemType].Count;
-            items[weapon.itemType].Add(weapon);
+            items.Add(itemTypes[i], new List<InventoryItem>());
+        }
+
+        if(canvas == null) {
+            Debug.LogError("Error: Canvas Object not set");
+            return;
+        }
+
+        GameObject weaponsCanvas = canvas.transform.Find("Weapons").gameObject;
+
+        foreach (DefaultWeapon defaultWeapon in defaultWeapons)
+        {
+            defaultWeapon.weaponItem.isPicked = defaultWeapon.isDefault;
+            defaultWeapon.weaponItem.itemType = InventoryItem.ItemType.kItemTypeWeapon;
+            defaultWeapon.weaponItem.index = items[defaultWeapon.weaponItem.itemType].Count;
+            items[defaultWeapon.weaponItem.itemType].Add(defaultWeapon.weaponItem);
+            GameObject newWeaponCanvas = Instantiate(weaponCanvasPrefab);
+            newWeaponCanvas.transform.SetParent(weaponsCanvas.transform);
+            newWeaponCanvas.GetComponent<Image>().sprite = defaultWeapon.weaponSprite;
         }
 
     }

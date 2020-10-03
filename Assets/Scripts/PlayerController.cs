@@ -43,9 +43,11 @@ public class PlayerController : MonoBehaviour {
   void SwapWeapon(int weaponIndex) {
     InventoryItem Item = Inventory.GetInventoryItemByIndex(InventoryItem.ItemType.kItemTypeWeapon, weaponIndex);
       if (Item) {
-        CurrentWeapon.gameObject.SetActive(false);
-        CurrentWeapon = (Weapon)Item;
-        CurrentWeapon.gameObject.SetActive(true);
+        if(Item.isPicked) {
+          CurrentWeapon.gameObject.SetActive(false);
+          CurrentWeapon = (Weapon)Item;
+          CurrentWeapon.gameObject.SetActive(true);
+        }
       }
   }
 

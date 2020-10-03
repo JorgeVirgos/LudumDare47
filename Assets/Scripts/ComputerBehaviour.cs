@@ -21,19 +21,26 @@ public class ComputerBehaviour : MonoBehaviour, IInteractable
 
   GameObject Player;
 
+  enum State
+  {
+    None = 0,
+    SceneLoaded,
+    Transitioned,
+    CameraChange
+  };
+
+  State currentState;
+
   public void Start()
   {
     persitantCameraGO = Camera.main.gameObject;
+    currentState = State.None;
   }
 
   public void Interact(GameObject interactor)
   {
-    BeginTransition();
-    // Disable Player Controller
-    interactor.GetComponent<PlayerController>().enabled = false;
-    // Set cursor visible
-    Cursor.lockState = CursorLockMode.None;
-    Cursor.visible = true;
+    BeginTransition(interactor);
+    
   }
 
   public void SetRenderTexture()
@@ -47,6 +54,8 @@ public class ComputerBehaviour : MonoBehaviour, IInteractable
     mr.material.SetTexture("_MainTex", rt);
     // Disable Movement
     Player.GetComponent<PlayerController>().enabled = false;
+    Transform t = Player.transform.GetChild(0);
+    t.GetChild(t.childCount - 1).gameObject.GetComponent<Canvas>().sortingOrder = -1;
   }
 
   IEnumerator LoadNextLevelCor()
@@ -56,18 +65,36 @@ public class ComputerBehaviour : MonoBehaviour, IInteractable
 
     AsyncOperation ao = SceneManager.LoadSceneAsync(nextSceneName, LoadSceneMode.Additive);
 
+    Debug.Log("Loading Next Scene: " + nextSceneName);
+
     while (!ao.isDone)
     {
       yield return null;
     }
+
+    currentState = State.SceneLoaded;
 
     currentScene = SceneManager.GetActiveScene();
     nextScene = SceneManager.GetSceneByName(nextSceneName);
     SetRenderTexture(); 
   }
 
-  IEnumerator BeginTransitionCor(float Speed)
+  IEnumerator BeginTransitionCor(GameObject player)
   {
+    if (currentState != State.SceneLoaded)
+    {
+      Debug.LogError("No level loaded.");
+      yield break;
+    }
+    currentState = State.Transitioned;
+    // Disable Player Controller
+    player.GetComponent<PlayerController>().enabled = false;
+    Transform t = player.transform.GetChild(0);
+    t.GetChild(t.childCount - 1).gameObject.GetComponent<Canvas>().sortingOrder = -1;
+    // Set cursor visible
+    Cursor.lockState = CursorLockMode.None;
+    Cursor.visible = true;
+
     Vector3 startPos = currentCamera.transform.position;
     Vector3 endPos = CameraTarget.transform.position;
 
@@ -80,7 +107,7 @@ public class ComputerBehaviour : MonoBehaviour, IInteractable
     {
       currentCamera.transform.position = Vector3.Lerp(startPos, endPos, alpha);
       currentCamera.transform.rotation = Quaternion.Lerp(startQuat, endQuat, alpha);
-      alpha += Speed * Time.deltaTime;
+      alpha += TransitionSpeed * Time.deltaTime;
       yield return null;
     }
 
@@ -100,10 +127,14 @@ public class ComputerBehaviour : MonoBehaviour, IInteractable
 
   IEnumerator ChangeCameraCor()
   {
+    currentState = State.CameraChange;
+
     gameMenu.SetActive(false);
 
     // Enable Movement
     Player.GetComponent<PlayerController>().enabled = true;
+    Transform t = Player.transform.GetChild(0);
+    t.GetChild(t.childCount - 1).gameObject.GetComponent<Canvas>().sortingOrder = 1;
 
     SceneManager.SetActiveScene(nextScene);
 
@@ -124,9 +155,9 @@ public class ComputerBehaviour : MonoBehaviour, IInteractable
     StartCoroutine(LoadNextLevelCor());
   }
 
-  public void BeginTransition()
+  public void BeginTransition(GameObject player)
   {
-    StartCoroutine(BeginTransitionCor(TransitionSpeed));
+    StartCoroutine(BeginTransitionCor(player));
   }
 
   public void ChangeCamera()

@@ -9,11 +9,14 @@ public class Interact : MonoBehaviour
 
   bool shouldInteract;
 
+  LineDrawer lineDrawer;
+
   void Start()
   {
     parent = transform.parent.gameObject;
     cameraTransform = transform.GetChild(0);
     shouldInteract = false;
+    lineDrawer = new LineDrawer(this.transform, 0.02f);
   }
 
   private void Update()
@@ -21,7 +24,8 @@ public class Interact : MonoBehaviour
     if (Input.GetKeyDown(KeyCode.E))
     {
       shouldInteract = true;
-    } else
+    }
+    if (Input.GetKeyUp(KeyCode.E))
     {
       shouldInteract = false;
     }
@@ -35,17 +39,23 @@ public class Interact : MonoBehaviour
 
     RaycastHit hit;
     // Does the ray intersect any objects excluding the player layer
+    Vector3 initPos = cameraTransform.position;
+    initPos.y -= 0.1f;
     Vector3 dir = cameraTransform.transform.TransformDirection(Vector3.forward);
-    Vector3 initPos = cameraTransform.position; 
-    if (Physics.Raycast(initPos, dir, out hit, Mathf.Infinity, layerMask))
+    float distance = 4.0f;
+    if (Physics.Raycast(initPos, dir, out hit, distance, layerMask))
     {
+      lineDrawer.DrawLineInGameView(initPos, initPos + (dir * distance), Color.green);
       if (shouldInteract)
       {
+        shouldInteract = false;
         GameObject go = hit.collider.gameObject;
         IInteractable interactable = go.GetComponent<IInteractable>();
         interactable.Interact(this.gameObject);
-        shouldInteract = false;
       }
+    } else
+    {
+      lineDrawer.DrawLineInGameView(initPos, initPos + (dir * distance), Color.red);
     }
   }
 }

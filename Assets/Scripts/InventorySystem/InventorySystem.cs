@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventorySystem : MonoBehaviour
 {
@@ -12,11 +13,20 @@ public class InventorySystem : MonoBehaviour
         public InventoryItem weaponItem;
         [SerializeField]
         public bool isDefault;
+        [SerializeField]
+        public Sprite weaponSprite;
     }
+
+    [SerializeField]
+    public GameObject canvas;
+
+    [SerializeField]
+    public GameObject weaponCanvasPrefab;
 
     [SerializeField]
     public List<DefaultWeapon> defaultWeapons;
     private Dictionary<InventoryItem.ItemType, List<InventoryItem>> items;
+
 
     #region Inventory System Utility
     public List<InventoryItem> GetAllInventoryItems()
@@ -102,12 +112,22 @@ public class InventorySystem : MonoBehaviour
             items.Add(itemTypes[i], new List<InventoryItem>());
         }
 
+        if(canvas == null) {
+            Debug.LogError("Error: Canvas Object not set");
+            return;
+        }
+
+        GameObject weaponsCanvas = canvas.transform.Find("Weapons").gameObject;
+
         foreach (DefaultWeapon defaultWeapon in defaultWeapons)
         {
             defaultWeapon.weaponItem.isPicked = defaultWeapon.isDefault;
             defaultWeapon.weaponItem.itemType = InventoryItem.ItemType.kItemTypeWeapon;
             defaultWeapon.weaponItem.index = items[defaultWeapon.weaponItem.itemType].Count;
             items[defaultWeapon.weaponItem.itemType].Add(defaultWeapon.weaponItem);
+            GameObject newWeaponCanvas = Instantiate(weaponCanvasPrefab);
+            newWeaponCanvas.transform.SetParent(weaponsCanvas.transform);
+            newWeaponCanvas.GetComponent<Image>().sprite = defaultWeapon.weaponSprite;
         }
 
     }

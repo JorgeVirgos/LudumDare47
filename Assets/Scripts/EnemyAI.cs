@@ -28,7 +28,8 @@ public class EnemyAI : MonoBehaviour
     {
         enemy = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
-        CurrentWeapon = (Weapon)this.gameObject.transform.GetChild(0).gameObject.GetComponent<Pistol>();
+        CurrentWeapon =this.gameObject.transform.GetChild(0).gameObject.GetComponent<Weapon>();
+       
     }
 
     private void Update()

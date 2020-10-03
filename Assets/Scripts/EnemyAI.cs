@@ -12,17 +12,20 @@ public class EnemyAI : MonoBehaviour
     public float losRad = 20f;
     public float AttackDistance = 10.0f;
     private Weapon CurrentWeapon;
+    private bool shoot;
+
 
     private void Start()
     {
         enemy = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
-        CurrentWeapon = (Weapon)Object.FindObjectOfType(typeof(Pistol));
+        CurrentWeapon = (Weapon)this.gameObject.transform.GetChild(0).gameObject.GetComponent<Pistol>();
     }
 
     private void Update()
     {
         CheckView();
+       
         if (Sightplayer)
         {
             ChasePlayer();
@@ -31,6 +34,16 @@ public class EnemyAI : MonoBehaviour
         {
             Patrol();
         }
+        if (shoot)
+        {
+            CurrentWeapon.Shoot();
+            
+        }
+        else
+        {
+            CurrentWeapon.bIsShooting = false;
+        }
+
     }
 
     void FacePlayer()
@@ -45,8 +58,13 @@ public class EnemyAI : MonoBehaviour
         if (dist < AttackDistance)
         {
             enemy.SetDestination(transform.position);
-            Shoot();
+            shoot = true;
         }
+        else
+        {
+            shoot = false;
+        }
+        
     }
     void CheckView()
     {
@@ -75,8 +93,5 @@ public class EnemyAI : MonoBehaviour
         randompos += this.transform.position;
         enemy.destination = randompos;
     }
-    void Shoot()
-    {
-        CurrentWeapon.Shoot();
-    }
+    
 }

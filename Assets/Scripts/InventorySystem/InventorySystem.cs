@@ -5,6 +5,7 @@ using UnityEngine;
 public class InventorySystem : MonoBehaviour
 {
 
+    public List<InventoryItem> weapons;
     private Dictionary<InventoryItem.ItemType, List<InventoryItem>> items;
 
     internal int actualWepaonIndex = 0;
@@ -43,15 +44,15 @@ public class InventorySystem : MonoBehaviour
     {
         if (newItem.index > 0) { return; }
         newItem.isPicked = true;
-        items[newItem.type].Add(newItem);
-        newItem.index = items[newItem.type].Count - 1;
+        items[newItem.itemType].Add(newItem);
+        newItem.index = items[newItem.itemType].Count - 1;
     }
 
     public void DeleteItem(InventoryItem deletedItem)
     {
         deletedItem.index = -1;
         deletedItem.isPicked = false;
-        items[deletedItem.type].Remove(deletedItem);
+        items[deletedItem.itemType].Remove(deletedItem);
     }
 
     public void Clear()
@@ -77,6 +78,15 @@ public class InventorySystem : MonoBehaviour
     public void Awake()
     {
         items = new Dictionary<InventoryItem.ItemType, List<InventoryItem>>();
+
+        foreach(InventoryItem weapon in weapons)
+        {
+            weapon.isPicked = false;
+            weapon.itemType = InventoryItem.ItemType.kItemTypeWeapon;
+            weapon.index = items[weapon.itemType].Count;
+            items[weapon.itemType].Add(weapon);
+        }
+
     }
     #endregion
 

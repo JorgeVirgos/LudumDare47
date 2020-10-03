@@ -17,6 +17,6 @@ public class InventoryItem : MonoBehaviour
 
     internal int index = -1;
     internal bool isPicked = false;
-    public ItemType type;
+    public ItemType itemType;
 
 }

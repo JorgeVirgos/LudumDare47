@@ -120,17 +120,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6605740857961799072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5468b1e0b2501f64d863d9f31240307c, type: 3}
+  m_Script: {fileID: 11500000, guid: 65d48f5bfcca36b4e802ae14701835cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 0
   Projectile: {fileID: 3884111157583132442, guid: ced23ed13a566584c8d639b1268bd552,
     type: 3}
   ShotCooldown: 1
-  WeaponDamage: 10
+  WeaponDamage: 5
   bIsShooting: 0
-  MaxAmmo: 0
-  MaxClipAmmo: 0
+  MaxAmmo: 30
+  MaxClipAmmo: 2
   NumberOfPellets: 10
   DispersionAngle: 0.5
-  DispersionDistance: 5
+  DispersionDistance: 2

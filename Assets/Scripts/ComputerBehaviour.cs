@@ -19,6 +19,8 @@ public class ComputerBehaviour : MonoBehaviour, IInteractable
   Camera currentCamera;
   Camera nextCamera;
 
+  GameObject Player;
+
   public void Start()
   {
     persitantCameraGO = Camera.main.gameObject;
@@ -26,16 +28,26 @@ public class ComputerBehaviour : MonoBehaviour, IInteractable
 
   public void Interact(GameObject interactor)
   {
-
+    BeginTransition();
+    // Disable Player Controller
+    interactor.GetComponent<PlayerController>().enabled = false;
+    // Set cursor visible
+    Cursor.lockState = CursorLockMode.None;
+    Cursor.visible = true;
   }
 
   public void SetRenderTexture()
   {
     GameObject[] go = nextScene.GetRootGameObjects();
-    nextCamera = go[0].transform.Find("Camera").gameObject.GetComponent<Camera>();
+    GameObject root = go[0];
+    Player = root.transform.Find("FPSPlayer").gameObject;
+    nextCamera = Player.transform.GetChild(0).GetComponent<Camera>();
     MeshRenderer mr = transform.GetChild(0).GetComponent<MeshRenderer>();
     RenderTexture rt = nextCamera.targetTexture;
     mr.material.SetTexture("_MainTex", rt);
+
+    // Disable Movement
+    Player.GetComponent<PlayerController>().enabled = false;
   }
 
   IEnumerator LoadNextLevelCor()
@@ -91,6 +103,9 @@ public class ComputerBehaviour : MonoBehaviour, IInteractable
   {
     gameMenu.SetActive(false);
 
+    // Enable Movement
+    Player.GetComponent<PlayerController>().enabled = true;
+
     SceneManager.SetActiveScene(nextScene);
 
     GameObject a = persitantCamera.transform.GetChild(0).transform.GetChild(0).gameObject;
@@ -102,19 +117,16 @@ public class ComputerBehaviour : MonoBehaviour, IInteractable
     SceneManager.UnloadSceneAsync(currentScene);
   }
 
-  [ContextMenu("Load Next Level")]
   public void LoadNextLevel()
   {
     StartCoroutine(LoadNextLevelCor());
   }
 
-  [ContextMenu("Begin Transition")]
   public void BeginTransition()
   {
     StartCoroutine(BeginTransitionCor(TransitionSpeed));
   }
 
-  [ContextMenu("Change Camera")]
   public void ChangeCamera()
   {
     StartCoroutine(ChangeCameraCor());

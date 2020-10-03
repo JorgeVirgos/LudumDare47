@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Root
   - Camera
+  - removableBox
+  - LongRangedRoom
+  - RandomRoom
+  - shortRangeRoom
   layers:
   - Default
   - TransparentFX

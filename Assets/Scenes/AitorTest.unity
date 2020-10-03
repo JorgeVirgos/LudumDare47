@@ -410,6 +410,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FPSPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 4472012592559972199, guid: bf9d7dac2956c9745bae25b5cde09356,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf9d7dac2956c9745bae25b5cde09356, type: 3}
 --- !u!4 &1169359331 stripped

@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
   public float JumpRaycastDistance = 0.6f;
   public float InteractableRaycastDistance = 100.0f;
   public Camera FPSCamera;
+  public KeyCode InteractKey = KeyCode.E;
 
   private float horizontalInput;
   private float verticalInput;
@@ -72,7 +73,9 @@ public class PlayerController : MonoBehaviour {
     Ray interactableRay = new Ray(transform.position, FPSCamera.transform.forward);
     Physics.Raycast(interactableRay, out InteractableHit);
     if (InteractableHit.distance <= InteractableRaycastDistance) {
-      // Call function on input
+      if(Input.GetKey(InteractKey)) {
+        // Call function
+      }
     }
 
   }

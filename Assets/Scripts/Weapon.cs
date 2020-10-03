@@ -6,6 +6,7 @@ public class Weapon : InventoryItem {
 
   public GameObject Projectile;
   public float ShotCooldown = 0.0f;
+  public float WeaponDamage = 10.0f;
   public bool bIsShooting = false;
   public int MaxAmmo;
   public int MaxClipAmmo;

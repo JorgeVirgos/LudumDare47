@@ -7,9 +7,11 @@ TagManager:
   - Root
   - Camera
   - removableBox
-  - LongRangedRoom
   - RandomRoom
   - shortRangeRoom
+  - LongRangedRoom
+  - Projectile
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5742205205125644377}
   m_Layer: 0
   m_Name: Projectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,6 +110,7 @@ MonoBehaviour:
   ImpulseDirection: {x: 0, y: 0, z: 0}
   Impulse: 100
   aliveTime: 1
+  Damage: 10
 --- !u!54 &5742205205125644377
 Rigidbody:
   m_ObjectHideFlags: 0

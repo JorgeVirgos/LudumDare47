@@ -7,6 +7,7 @@ public class BasicProjectile : MonoBehaviour {
   public Vector3 ImpulseDirection;
   public float Impulse;
   public float aliveTime;
+  public float Damage = 10.0f;
 
   private Rigidbody Rb;
 
@@ -22,5 +23,16 @@ public class BasicProjectile : MonoBehaviour {
     if(aliveTime <= 0.0f) {
       Destroy(gameObject);
     }
+  }
+
+  void OnCollisionEnter(Collision collision) {
+    if(collision.gameObject.tag == "Projectile") return;
+    if(collision.gameObject.tag == "Enemy") {
+      EnemyAI enemy = collision.gameObject.GetComponent<EnemyAI>();
+      if(enemy) {
+        enemy.TakeDamage(Damage);
+      }
+    }
+    Destroy(gameObject);
   }
 }

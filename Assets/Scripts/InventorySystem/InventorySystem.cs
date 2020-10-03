@@ -35,6 +35,25 @@ public class InventorySystem : MonoBehaviour
         return queriedItems;
     }
 
+    public List<InventoryItem> GetAllPickedItems()
+    {
+        List<InventoryItem> queriedItems = new List<InventoryItem>();
+
+        foreach (KeyValuePair<InventoryItem.ItemType, List<InventoryItem>> inventoryItems in items)
+        {
+            foreach (InventoryItem iteratingItem in inventoryItems.Value)
+            {
+                if (iteratingItem.isPicked)
+                {
+                    queriedItems.Add(iteratingItem);
+                }
+            }
+        }
+
+        return queriedItems;
+
+    }
+
     public List<InventoryItem> GetInventoryItemsByType(InventoryItem.ItemType queriedType)
     {
         return items[queriedType];

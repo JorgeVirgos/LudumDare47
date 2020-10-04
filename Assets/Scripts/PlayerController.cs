@@ -95,17 +95,17 @@ public class PlayerController : MonoBehaviour
       CurrentWeapon.bIsShooting = false;
     }
 
-    if (Input.GetKey(KeyCode.Q))
+    if (Input.GetKey(KeyCode.Alpha1))
     {
       SwapWeapon(0);
     }
 
-    if (Input.GetKey(KeyCode.T))
+    if (Input.GetKey(KeyCode.Alpha2))
     {
       SwapWeapon(1);
     }
 
-    if (Input.GetKey(KeyCode.Y))
+    if (Input.GetKey(KeyCode.Alpha3))
     {
       SwapWeapon(2);
     }

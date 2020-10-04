@@ -16,12 +16,17 @@ public class Weapon : InventoryItem {
   public bool bIsShooting = false;
   public int MaxAmmo;
   public int MaxClipAmmo;
+  public AudioClip ShootSound;
+  public AudioClip ReloadSound;
+
   internal WeaponType weaponType;
 
   protected int CurrentAmmo;
   protected int CurrentClipAmmo;
   protected float CurrentShotCooldown = 0.0f;
   protected float AmmunitionQuantity;
+
+  private AudioSource AudioComp;
 
   // Start is called before the first frame update
   void Start() {
@@ -37,9 +42,11 @@ public class Weapon : InventoryItem {
 
   public virtual void Shoot() {
     CurrentClipAmmo -= 1;
+    AudioComp.PlayOneShot(ShootSound);
   }
 
   public void Reload() {
+    AudioComp.PlayOneShot(ReloadSound);
     if(CurrentAmmo >= MaxClipAmmo) {
       CurrentClipAmmo = MaxClipAmmo;
       CurrentAmmo -= MaxClipAmmo;

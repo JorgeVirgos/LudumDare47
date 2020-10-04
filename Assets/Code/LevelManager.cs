@@ -56,7 +56,7 @@ public class LevelManager : MonoBehaviour
     RoomNode previous_room_;
     List<RoomNode> next_rooms_;
 
-    float room_size = 45.0f;
+    float room_size = 24.0f;
     float enemy_value = 0.0f;
     float box_value = 0.0f;
 
@@ -107,7 +107,7 @@ public class LevelManager : MonoBehaviour
             new_level.transform.localPosition = current_level.transform.localPosition + relative_pos;
 
         new_level.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
-        new_level.transform.localScale = new Vector3(5.0f, 5.0f, 5.0f);
+        new_level.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
         return new_level;
     }
 
@@ -195,22 +195,30 @@ public class LevelManager : MonoBehaviour
     void ActiveDoors(RoomNode room, GameObject level)
     {
         GameObject plane = level.transform.GetChild(0).gameObject;
+        string[] directions = new string[4]
+        {
+            "N","S", "E", "W",
+        };
+        int[] ids = new int[4]
+        {
+            room.room_id_north_,room.room_id_south_,room.room_id_east_,room.room_id_west_
+        };
 
-        bool dir_active = room.room_id_north_ == 0;
-        plane.transform.Find("NWall").gameObject.SetActive(dir_active);
-        plane.transform.Find("NDoor").gameObject.SetActive(!dir_active);
+        for(int i = 0; i < 4; ++i)
+        {
+            bool dir_active = ids[i] == 0;
+            plane.transform.Find(directions[i] + "Wall").gameObject.SetActive(dir_active);
 
-        dir_active = room.room_id_south_ == 0;
-        plane.transform.Find("SWall").gameObject.SetActive(dir_active);
-        plane.transform.Find("SDoor").gameObject.SetActive(!dir_active);
+            GameObject door = plane.transform.Find(directions[i] + "Door").gameObject;
+            door.SetActive(!dir_active);
 
-        dir_active = room.room_id_east_ == 0;
-        plane.transform.Find("EWall").gameObject.SetActive(dir_active);
-        plane.transform.Find("EDoor").gameObject.SetActive(!dir_active);
+            if (door.transform.childCount > 0)
+            {
+                door.transform.GetChild(0).gameObject.SetActive(current_room_.id() == ids[i]);
+                if (current_room_.id() == ids[i]) Debug.Log("Created Opposing Door");
+            }
+        }
 
-        dir_active = room.room_id_west_ == 0;
-        plane.transform.Find("WWall").gameObject.SetActive(dir_active);
-        plane.transform.Find("WDoor").gameObject.SetActive(!dir_active);
     }
 
     void FirstLevel()

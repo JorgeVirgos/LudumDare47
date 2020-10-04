@@ -5,17 +5,43 @@ using UnityEngine;
 public class PickableObject : InventoryItem {
 
   public enum KeyNumber {
-    kKeyNumberFirst = 0, 
+    kKeyNumberNone = 0,
+    kKeyNumberFirst, 
     kKeyNumberSecond, 
     kKeyNumberThird, 
     kKeyNumberFourth, 
     kKeyNumberFifth, 
   }
-
   public KeyNumber KeyTag;
   public float RotateSpeed = 50.0f;
   public float HealAmount = 30.0f;
   public float ArmorAmount = 30.0f;
+
+  static Color[] Colors =
+  {
+    Color.red,
+    Color.green,
+    Color.yellow,
+    Color.blue,
+    Color.magenta
+  };
+
+  static public Color GetKeyColor(KeyNumber key)
+  {
+    if (key == KeyNumber.kKeyNumberNone)
+      Debug.LogError("GET DOWN MISTER OBAMA THIS IS A KEY WITHOUT A NUMBER");
+    return Colors[(int)key - 1];
+  }
+
+  void Start()
+  {
+    if (itemType == ItemType.kItemTypeKey)
+    {
+      
+      GetComponent<MeshRenderer>().material.color = GetKeyColor(KeyTag);
+    }
+    
+  }
 
   // Update is called once per frame
   void Update() {

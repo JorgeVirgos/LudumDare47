@@ -7,7 +7,7 @@ using UnityEngine;
 public class SpawnEnemiesInRoom : MonoBehaviour
 {
 
-    public GameObject current_level = null;
+    /*public GameObject current_level = null;
     public GameObject PistolEnemy, RifleEnemy, ShotgunEnemy;
     public int num = 3;
    
@@ -63,5 +63,5 @@ public class SpawnEnemiesInRoom : MonoBehaviour
            
          }
     
-    }
+    }*/
 }

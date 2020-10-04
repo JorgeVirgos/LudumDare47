@@ -10,6 +10,10 @@ public class Shotgun : Weapon {
 
   private Transform child;
 
+  Shotgun() {
+    weaponType = WeaponType.kWeaponTypeShotgun;
+  }
+
   // Start is called before the first frame update
   void Start() {
     CurrentAmmo = MaxAmmo;

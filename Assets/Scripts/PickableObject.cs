@@ -14,6 +14,8 @@ public class PickableObject : InventoryItem {
 
   public KeyNumber KeyTag;
   public float RotateSpeed = 50.0f;
+  public float HealAmount = 30.0f;
+  public float ArmorAmount = 30.0f;
 
   // Update is called once per frame
   void Update() {
@@ -28,19 +30,28 @@ public class PickableObject : InventoryItem {
         switch (itemType) {
           case InventoryItem.ItemType.kItemTypeWeapon:
             {
-              // Add Weapon
+              Inventory.GrabItem(this);
+              gameObject.SetActive(false);
             }break;
           case InventoryItem.ItemType.kItemTypeAmmo:
             {
-              // Reload Ammo
+              for(int i = 0; i < 3; ++i) {
+                Weapon w = 
+                  (Weapon)Inventory.GetInventoryItemByIndex(InventoryItem.ItemType.kItemTypeWeapon, i);
+                if(w) {
+                  w.RecoverAmmo(w.MaxAmmo / 3);
+                }
+              }
             }break;
           case InventoryItem.ItemType.kItemTypeHP:
             {
-              // Heal Player
+              HealthComponent health = collider.gameObject.GetComponent<HealthComponent>();
+              if(health) health.Heal(HealAmount);
             }break;
           case InventoryItem.ItemType.kItemTypeArmour:
             {
-              // Heal Armor
+              HealthComponent health = collider.gameObject.GetComponent<HealthComponent>();
+              if(health) health.RestoreArmor(ArmorAmount);
             }break;
           case InventoryItem.ItemType.kItemTypePowerUp:
             {

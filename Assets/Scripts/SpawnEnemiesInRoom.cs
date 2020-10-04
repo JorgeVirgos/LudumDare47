@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpawnEnemiesInRoom : MonoBehaviour
 {
 
-    public GameObject current_level = null;
+    /*public GameObject current_level = null;
     public GameObject PistolEnemy, RifleEnemy, ShotgunEnemy;
     public int num = 3;
     // Start is called before the first frame update
@@ -55,5 +55,5 @@ public class SpawnEnemiesInRoom : MonoBehaviour
            
          }
     
-    }
+    }*/
 }

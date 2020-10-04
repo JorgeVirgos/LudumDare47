@@ -19,6 +19,8 @@ public class Interact : MonoBehaviour
     lineDrawer = new LineDrawer(this.transform, 0.02f);
   }
 
+  IInteractable currentInteractable;
+
   private void Update()
   {
     if (Input.GetKeyDown(KeyCode.E))
@@ -45,17 +47,21 @@ public class Interact : MonoBehaviour
     float distance = 4.0f;
     if (Physics.Raycast(initPos, dir, out hit, distance, layerMask))
     {
-      lineDrawer.DrawLineInGameView(initPos, initPos + (dir * distance), Color.green);
+      GameObject go = hit.collider.gameObject;
+      currentInteractable = go.GetComponent<IInteractable>();
+      currentInteractable.SetHighlightActive(true);
       if (shouldInteract)
       {
         shouldInteract = false;
-        GameObject go = hit.collider.gameObject;
-        IInteractable interactable = go.GetComponent<IInteractable>();
-        interactable.Interact(this.gameObject);
+        currentInteractable.Interact(this.gameObject);
       }
     } else
     {
-      lineDrawer.DrawLineInGameView(initPos, initPos + (dir * distance), Color.red);
+      if (currentInteractable != null)
+      {
+        currentInteractable.SetHighlightActive(false);
+        currentInteractable = null;
+      }
     }
   }
 }

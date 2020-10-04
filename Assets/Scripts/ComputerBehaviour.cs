@@ -10,6 +10,7 @@ public class ComputerBehaviour : MonoBehaviour, IInteractable
   public Shader shader;
   public GameObject CameraTarget;
   public float TransitionSpeed = 1.0f;
+  public MeshRenderer highlightMesh;
 
   Scene currentScene;
   Scene nextScene;
@@ -35,6 +36,7 @@ public class ComputerBehaviour : MonoBehaviour, IInteractable
   {
     persitantCameraGO = Camera.main.gameObject;
     currentState = State.None;
+    InteractableHelper.AddHighlightMaterial(highlightMesh);
   }
 
   public void Interact(GameObject interactor)
@@ -165,4 +167,8 @@ public class ComputerBehaviour : MonoBehaviour, IInteractable
     StartCoroutine(ChangeCameraCor());
   }
 
+  public void SetHighlightActive(bool active)
+  {
+    InteractableHelper.ToggleHighlight(highlightMesh, active);
+  }
 }

@@ -28,6 +28,7 @@ public class DoorBehaviour : MonoBehaviour, IInteractable
     transitioning = false;
     isOpen = false;
     shouldDestroy = false;
+    InteractableHelper.AddHighlightMaterial(doorMesh.GetComponent<MeshRenderer>());
   }
 
   void Update()
@@ -103,5 +104,10 @@ public class DoorBehaviour : MonoBehaviour, IInteractable
   {
     // TODO:
     
+  }
+
+  public void SetHighlightActive(bool active)
+  {
+    InteractableHelper.ToggleHighlight(doorMesh.GetComponent<MeshRenderer>(), active);
   }
 }

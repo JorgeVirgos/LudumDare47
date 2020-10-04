@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 2728002580156730940}
   - component: {fileID: 5548084507521449518}
   - component: {fileID: 230044344}
+  - component: {fileID: 8411282166787236011}
   m_Layer: 0
   m_Name: FPSPlayer
   m_TagString: Player
@@ -187,6 +188,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82f9887ae68b12429e3b3ec7de15d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8411282166787236011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2728002580156730941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6b945c7f3be88747a5d5562c5557f65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 100
 --- !u!1 &2728002580218983387
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,6 +655,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5547392489167367861, guid: f81a04f0b8acae340aab13227c07e5e5,
+        type: 3}
+      propertyPath: ShotCooldown
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4490338958836521994, guid: f81a04f0b8acae340aab13227c07e5e5, type: 3}

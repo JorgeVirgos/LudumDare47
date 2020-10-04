@@ -79,7 +79,14 @@ public class InventorySystem : MonoBehaviour
 
     public void GrabItem(InventoryItem newItem)
     {
-        if (newItem.index > 0) {
+        if(newItem.itemType == InventoryItem.ItemType.kItemTypeWeapon) {
+          Weapon w = newItem as Weapon;
+          if(w) {
+            items[newItem.itemType][(int)w.weaponType].isPicked = true;
+            return;
+          }
+        }
+        if (newItem.index >= 0) {
             newItem.isPicked = true;
             return;
         }

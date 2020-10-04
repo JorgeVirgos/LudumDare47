@@ -6,6 +6,10 @@ public class MachineGun : Weapon {
 
   private Transform child;
 
+  MachineGun() {
+    weaponType = WeaponType.kWeaponTypeMachineGun;
+  }
+
   // Start is called before the first frame update
   void Start() {
     CurrentAmmo = MaxAmmo;

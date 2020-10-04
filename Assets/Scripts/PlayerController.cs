@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(InventorySystem))]
 public class PlayerController : MonoBehaviour
 {
 
@@ -19,7 +18,7 @@ public class PlayerController : MonoBehaviour
   [Range(0.01f, 1.0f)]
   public float jumpFix = 0.05f;
 
-  private InventorySystem Inventory;
+  public InventorySystem Inventory;
   private Weapon CurrentWeapon;
   private float horizontalInput;
   private float verticalInput;
@@ -40,7 +39,7 @@ public class PlayerController : MonoBehaviour
     Cursor.visible = false;
     Cursor.lockState = CursorLockMode.Locked;
 
-    Inventory = GetComponent<InventorySystem>();
+    // Inventory = GetComponent<InventorySystem>();
     InventoryItem Item = Inventory.GetInventoryItemByIndex(InventoryItem.ItemType.kItemTypeWeapon, 0);
     if (Item)
     {

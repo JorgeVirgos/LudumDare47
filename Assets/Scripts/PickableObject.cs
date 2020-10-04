@@ -26,31 +26,31 @@ public class PickableObject : InventoryItem {
       InventorySystem Inventory = collider.gameObject.GetComponent<InventorySystem>();
       if(Inventory) {
         switch (itemType) {
-          case kItemTypeWeapon:
+          case InventoryItem.ItemType.kItemTypeWeapon:
             {
               // Add Weapon
-            }
-          case kItemTypeAmmo:
+            }break;
+          case InventoryItem.ItemType.kItemTypeAmmo:
             {
               // Reload Ammo
-            }
-          case kItemTypeHP:
+            }break;
+          case InventoryItem.ItemType.kItemTypeHP:
             {
               // Heal Player
-            }
-          case kItemTypeArmour:
+            }break;
+          case InventoryItem.ItemType.kItemTypeArmour:
             {
               // Heal Armor
-            }
-          case kItemTypePowerUp:
+            }break;
+          case InventoryItem.ItemType.kItemTypePowerUp:
             {
               // Get Power Up
-            }
-          case kItemTypeKey:
+            }break;
+          case InventoryItem.ItemType.kItemTypeKey:
             {
               Inventory.GrabItem(this);
               gameObject.SetActive(false);
-            }
+            }break;
         }
       }
     }

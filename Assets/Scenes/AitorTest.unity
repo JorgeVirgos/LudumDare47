@@ -323,10 +323,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 391172343}
     m_Modifications:
-    - target: {fileID: 88979320, guid: bf9d7dac2956c9745bae25b5cde09356, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1418245805186398333, guid: bf9d7dac2956c9745bae25b5cde09356,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -391,11 +387,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FPSPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 4472012592559972199, guid: bf9d7dac2956c9745bae25b5cde09356,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf9d7dac2956c9745bae25b5cde09356, type: 3}
@@ -505,6 +496,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 391172343}
     m_Modifications:
+    - target: {fileID: 1179787340920909931, guid: bb41216f8ade5d949baf9e62f8a6d23a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179787340920909931, guid: bb41216f8ade5d949baf9e62f8a6d23a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179787340920909931, guid: bb41216f8ade5d949baf9e62f8a6d23a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.33587575
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179787340920909931, guid: bb41216f8ade5d949baf9e62f8a6d23a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179787340920909931, guid: bb41216f8ade5d949baf9e62f8a6d23a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.94190633
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179787340920909931, guid: bb41216f8ade5d949baf9e62f8a6d23a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -39.252003
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179787340920909931, guid: bb41216f8ade5d949baf9e62f8a6d23a,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.6314
+      objectReference: {fileID: 0}
     - target: {fileID: 4705682559643929581, guid: bb41216f8ade5d949baf9e62f8a6d23a,
         type: 3}
       propertyPath: m_Name
@@ -569,6 +595,11 @@ PrefabInstance:
         type: 3}
       propertyPath: nextSceneName
       value: AitorTest1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6130400793483672274, guid: bb41216f8ade5d949baf9e62f8a6d23a,
+        type: 3}
+      propertyPath: TransitionSpeed
+      value: 1.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb41216f8ade5d949baf9e62f8a6d23a, type: 3}

@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     Cursor.lockState = CursorLockMode.Locked;
 
     // Inventory = GetComponent<InventorySystem>();
+
     InventoryItem Item = Inventory.GetInventoryItemByIndex(InventoryItem.ItemType.kItemTypeWeapon, 0);
     if (Item)
     {

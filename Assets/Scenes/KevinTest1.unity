@@ -609,8 +609,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 195051726}
-  weaponCanvasPrefab: {fileID: 7404203263658626185, guid: e6cd89c6a185d5b4b96581c9c00b43c8,
-    type: 3}
+  weaponItemTypeCanvas:
+    canvasPrefab: {fileID: 7404203263658626185, guid: e6cd89c6a185d5b4b96581c9c00b43c8,
+      type: 3}
+    notPickedColor: {r: 1, g: 1, b: 1, a: 0.49019608}
+    pickedColor: {r: 1, g: 1, b: 1, a: 1}
+    highlightColor: {r: 0.6745283, g: 1, b: 1, a: 1}
   defaultWeapons:
   - weaponItem: {fileID: 342360003}
     isDefault: 1
@@ -619,7 +623,7 @@ MonoBehaviour:
     isDefault: 1
     weaponSprite: {fileID: 21300000, guid: 78732e1d832905f499e8770736776e1a, type: 3}
   - weaponItem: {fileID: 677270066}
-    isDefault: 1
+    isDefault: 0
     weaponSprite: {fileID: 21300000, guid: 2fec47c59a808c84a851e46a75d798f0, type: 3}
 --- !u!4 &1193980080
 Transform:

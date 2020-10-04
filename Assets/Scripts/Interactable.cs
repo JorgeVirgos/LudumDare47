@@ -31,6 +31,13 @@ public class InteractableHelper
     renderer.materials[renderer.materials.Length - 1].SetFloat("_Outline", 0.0f);
   }
 
+  public static void RemoveHighlight(Renderer renderer)
+  {
+    List<Material> mats = new List<Material>(renderer.materials);
+    mats.RemoveAt(renderer.materials.Length - 1);
+    renderer.materials = mats.ToArray();
+  }
+
   public static void ToggleHighlight(Renderer renderer, bool active)
   {
     if (active)

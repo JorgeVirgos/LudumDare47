@@ -37,8 +37,11 @@ public class PickableObject : InventoryItem {
   {
     if (itemType == ItemType.kItemTypeKey)
     {
-      
-      GetComponent<MeshRenderer>().material.color = GetKeyColor(KeyTag);
+      MeshRenderer[] mrs = GetComponentsInChildren<MeshRenderer>();
+      foreach (MeshRenderer mr in mrs)
+      {
+        mr.material.color = GetKeyColor(KeyTag);
+      }
     }
     
   }

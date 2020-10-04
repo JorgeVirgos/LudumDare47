@@ -42,8 +42,9 @@ public class ComputerBehaviour : MonoBehaviour, IInteractable
 
   public void Interact(GameObject interactor)
   {
+    //InteractableHelper.ToggleHighlight(highlightMesh, false);
+    InteractableHelper.RemoveHighlight(highlightMesh);
     BeginTransition(interactor);
-    
   }
 
   public void SetRenderTexture()

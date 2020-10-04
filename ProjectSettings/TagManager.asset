@@ -12,6 +12,7 @@ TagManager:
   - LongRangedRoom
   - Projectile
   - Enemy
+  - spawner
   layers:
   - Default
   - TransparentFX

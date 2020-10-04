@@ -365,6 +365,7 @@ MonoBehaviour:
   shader: {fileID: 211, guid: 0000000000000000f000000000000000, type: 0}
   CameraTarget: {fileID: 4032046233985944397}
   TransitionSpeed: 1
+  highlightMesh: {fileID: 4705682559401300114}
 --- !u!65 &81721642370190919
 BoxCollider:
   m_ObjectHideFlags: 0

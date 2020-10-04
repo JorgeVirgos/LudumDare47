@@ -2,7 +2,7 @@
 	Properties {
 		_Color ("Main Color", Color) = (.5,.5,.5,1)
 		_OutlineColor ("Outline Color", Color) = (0,0,0,1)
-		_Outline ("Outline width", Range (0, 1)) = .1
+		_Outline ("Outline Width", Range (0, 1)) = .1
 		_MainTex ("Base (RGB)", 2D) = "white" { }
 	}
  
@@ -36,10 +36,10 @@ v2f vert(appdata v) {
 ENDCG
  
 	SubShader {
-		Tags { "Queue" = "Transparent" "IgnoreProjector" = "True"}
+		Tags { "Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent"}
 		Cull Back
 		CGPROGRAM
-		#pragma surface surf Lambert
+   #pragma surface surf Lambert alpha
 		 
 		sampler2D _MainTex;
 		fixed4 _Color;
@@ -49,9 +49,12 @@ ENDCG
 		};
 		 
 		void surf (Input IN, inout SurfaceOutput o) {
+      /*
 			fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
 			o.Albedo = c.rgb;
 			o.Alpha = c.a;
+      */
+      o.Alpha = 0.0f;
 		}
 		ENDCG
 

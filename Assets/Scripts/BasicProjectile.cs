@@ -28,7 +28,7 @@ public class BasicProjectile : MonoBehaviour {
   void OnCollisionEnter(Collision collision) {
     if(collision.gameObject.tag == "Projectile") return;
     if(collision.gameObject.tag == "Enemy") {
-      EnemyAI enemy = collision.gameObject.GetComponent<EnemyAI>();
+      HealthComponent enemy = collision.gameObject.GetComponent<HealthComponent>();
       if(enemy) {
         enemy.TakeDamage(Damage);
       }

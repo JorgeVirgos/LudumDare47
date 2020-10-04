@@ -13,16 +13,6 @@ public class EnemyAI : MonoBehaviour
     public float AttackDistance = 10.0f;
     private Weapon CurrentWeapon;
     private bool shoot;
-    private float HP = 100.0f;
-
-  public void TakeDamage(float damage) {
-    HP -= damage;
-    if(HP <= 0.0f) Die();
-  }
-
-  private void Die() {
-    Destroy(gameObject);
-  }
 
     private void Start()
     {

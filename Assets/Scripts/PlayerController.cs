@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
         CurrentWeapon.gameObject.SetActive(false);
         CurrentWeapon = (Weapon)Item;
         CurrentWeapon.gameObject.SetActive(true);
+        Inventory.SelectWeapon(weaponIndex);
       }
     }
   }

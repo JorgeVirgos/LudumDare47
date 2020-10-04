@@ -6,158 +6,207 @@ using UnityEngine.UI;
 public class InventorySystem : MonoBehaviour
 {
 
-  [System.Serializable]
-  public struct DefaultWeapon
-  {
-    [SerializeField]
-    public InventoryItem weaponItem;
-    [SerializeField]
-    public bool isDefault;
-    [SerializeField]
-    public Sprite weaponSprite;
-  }
-
-  [SerializeField]
-  public GameObject canvas;
-
-  [SerializeField]
-  public GameObject weaponCanvasPrefab;
-
-  [SerializeField]
-  public List<DefaultWeapon> defaultWeapons;
-  private Dictionary<InventoryItem.ItemType, List<InventoryItem>> items;
-
-  public bool HasThisKey(PickableObject.KeyNumber key)
-  {
-    List<InventoryItem> keys = items[InventoryItem.ItemType.kItemTypeKey];
-    foreach (InventoryItem item in keys)
+    [System.Serializable]
+    public struct DefaultWeapon
     {
-      PickableObject po = (PickableObject)item;
-      if (po != null && po.KeyTag == key)
-      {
-        return true;
-      }
-      
-    }
-    return false;
-  }
-
-
-  #region Inventory System Utility
-  public List<InventoryItem> GetAllInventoryItems()
-  {
-
-    List<InventoryItem> queriedItems = new List<InventoryItem>();
-
-    foreach (KeyValuePair<InventoryItem.ItemType, List<InventoryItem>> inventoryItems in items)
-    {
-      foreach (InventoryItem iteratingItem in inventoryItems.Value)
-      {
-        queriedItems.Add(iteratingItem);
-      }
+        [SerializeField]
+        public InventoryItem weaponItem;
+        [SerializeField]
+        public bool isDefault;
+        [SerializeField]
+        public Sprite weaponSprite;
     }
 
-    return queriedItems;
-  }
-
-  public List<InventoryItem> GetAllPickedItems()
-  {
-    List<InventoryItem> queriedItems = new List<InventoryItem>();
-
-    foreach (KeyValuePair<InventoryItem.ItemType, List<InventoryItem>> inventoryItems in items)
+    [System.Serializable]
+    public struct InventoryItemTypeCanvas
     {
-      foreach (InventoryItem iteratingItem in inventoryItems.Value)
-      {
-        if (iteratingItem.isPicked)
+        [SerializeField]
+        public GameObject canvasPrefab;
+
+        [SerializeField]
+        public Color notPickedColor;
+
+        [SerializeField]
+        public Color pickedColor;
+
+        [SerializeField]
+        public Color highlightColor;
+    }
+
+    [SerializeField]
+    public GameObject canvas;
+
+    [SerializeField]
+    public InventoryItemTypeCanvas weaponItemTypeCanvas;
+
+
+    private List<Image> weaponImages;
+    private int actualWeaponImageIndex = 0;
+
+    [SerializeField]
+    public List<DefaultWeapon> defaultWeapons;
+    private Dictionary<InventoryItem.ItemType, List<InventoryItem>> items;
+
+    #region Inventory System Utility
+    public bool HasThisKey(PickableObject.KeyNumber key)
+    {
+        List<InventoryItem> keys = items[InventoryItem.ItemType.kItemTypeKey];
+        foreach (InventoryItem item in keys)
         {
-          queriedItems.Add(iteratingItem);
+            PickableObject po = (PickableObject)item;
+            if (po != null && po.KeyTag == key)
+            {
+                return true;
+            }
+
         }
-      }
+        return false;
     }
 
-    return queriedItems;
 
-  }
 
-  public List<InventoryItem> GetInventoryItemsByType(InventoryItem.ItemType queriedType)
-  {
-    return items[queriedType];
-  }
-
-  public InventoryItem GetInventoryItemByIndex(InventoryItem.ItemType itemType, int itemIndex)
-  {
-    if (!items.ContainsKey(itemType)) { return null; }
-    if (itemIndex >= items[itemType].Count) { return null; }
-
-    return items[itemType][itemIndex];
-  }
-
-  public void GrabItem(InventoryItem newItem)
-  {
-    if (newItem.itemType == InventoryItem.ItemType.kItemTypeWeapon)
+    public List<InventoryItem> GetAllInventoryItems()
     {
-      Weapon w = newItem as Weapon;
-      if (w)
-      {
-        items[newItem.itemType][(int)w.weaponType].isPicked = true;
-        return;
-      }
+
+        List<InventoryItem> queriedItems = new List<InventoryItem>();
+
+        foreach (KeyValuePair<InventoryItem.ItemType, List<InventoryItem>> inventoryItems in items)
+        {
+            foreach (InventoryItem iteratingItem in inventoryItems.Value)
+            {
+                queriedItems.Add(iteratingItem);
+            }
+        }
+
+        return queriedItems;
     }
-    if (newItem.index >= 0)
+
+    public List<InventoryItem> GetAllPickedItems()
     {
-      newItem.isPicked = true;
-      return;
+        List<InventoryItem> queriedItems = new List<InventoryItem>();
+
+        foreach (KeyValuePair<InventoryItem.ItemType, List<InventoryItem>> inventoryItems in items)
+        {
+            foreach (InventoryItem iteratingItem in inventoryItems.Value)
+            {
+                if (iteratingItem.isPicked)
+                {
+                    queriedItems.Add(iteratingItem);
+                }
+            }
+        }
+
+        return queriedItems;
+
     }
-    items[newItem.itemType].Add(newItem);
-    newItem.index = items[newItem.itemType].Count - 1;
-  }
 
-  public void DeleteItem(InventoryItem deletedItem)
-  {
-    deletedItem.index = -1;
-    deletedItem.isPicked = false;
-    items[deletedItem.itemType].Remove(deletedItem);
-  }
-
-  public void Clear()
-  {
-    items.Clear();
-  }
-  #endregion
-
-  #region Unity Logic
-  public void Awake()
-  {
-
-    items = new Dictionary<InventoryItem.ItemType, List<InventoryItem>>();
-
-    InventoryItem.ItemType[] itemTypes = System.Enum.GetValues(typeof(InventoryItem.ItemType)) as InventoryItem.ItemType[];
-    for (int i = 0; i < itemTypes.Length; i++)
+    public List<InventoryItem> GetInventoryItemsByType(InventoryItem.ItemType queriedType)
     {
-      items.Add(itemTypes[i], new List<InventoryItem>());
+        return items[queriedType];
     }
 
-    if (canvas == null)
+    public InventoryItem GetInventoryItemByIndex(InventoryItem.ItemType itemType, int itemIndex)
     {
-      Debug.LogError("Error: Canvas Object not set");
-      return;
+        if (!items.ContainsKey(itemType)) { return null; }
+        if (itemIndex >= items[itemType].Count) { return null; }
+
+        return items[itemType][itemIndex];
     }
 
-    GameObject weaponsCanvas = canvas.transform.Find("Weapons").gameObject;
-
-    foreach (DefaultWeapon defaultWeapon in defaultWeapons)
+    public void GrabItem(InventoryItem newItem)
     {
-      defaultWeapon.weaponItem.isPicked = defaultWeapon.isDefault;
-      defaultWeapon.weaponItem.itemType = InventoryItem.ItemType.kItemTypeWeapon;
-      defaultWeapon.weaponItem.index = items[defaultWeapon.weaponItem.itemType].Count;
-      items[defaultWeapon.weaponItem.itemType].Add(defaultWeapon.weaponItem);
-      GameObject newWeaponCanvas = Instantiate(weaponCanvasPrefab);
-      newWeaponCanvas.transform.SetParent(weaponsCanvas.transform);
-      if (defaultWeapon.weaponSprite != null)
-        newWeaponCanvas.GetComponent<Image>().sprite = defaultWeapon.weaponSprite;
+        if (newItem.itemType == InventoryItem.ItemType.kItemTypeWeapon)
+        {
+            Weapon w = newItem as Weapon;
+            if (w)
+            {
+                items[newItem.itemType][(int)w.weaponType].isPicked = true;
+                weaponImages[(int)w.weaponType].color = weaponItemTypeCanvas.pickedColor;
+                return;
+            }
+        }
+        if (newItem.index >= 0)
+        {
+            newItem.isPicked = true;
+            return;
+        }
+        items[newItem.itemType].Add(newItem);
+        newItem.index = items[newItem.itemType].Count - 1;
     }
 
-  }
-  #endregion
+    public void DeleteItem(InventoryItem deletedItem)
+    {
+        deletedItem.index = -1;
+        deletedItem.isPicked = false;
+        items[deletedItem.itemType].Remove(deletedItem);
+    }
+
+    public void Clear()
+    {
+        items.Clear();
+    }
+
+    public void SelectWeapon(int weaponIndex)
+    {
+        weaponImages[actualWeaponImageIndex].enabled = false;
+        //         weaponImages[actualWeaponImageIndex].color = weaponItemTypeCanvas.pickedColor;
+        weaponImages[weaponIndex].color = weaponItemTypeCanvas.highlightColor;
+        weaponImages[weaponIndex].enabled = true;
+        actualWeaponImageIndex = weaponIndex;
+    }
+
+    #endregion
+
+    #region Unity Logic
+    public void Awake()
+    {
+
+        items = new Dictionary<InventoryItem.ItemType, List<InventoryItem>>();
+
+        InventoryItem.ItemType[] itemTypes = System.Enum.GetValues(typeof(InventoryItem.ItemType)) as InventoryItem.ItemType[];
+        for (int i = 0; i < itemTypes.Length; i++)
+        {
+            items.Add(itemTypes[i], new List<InventoryItem>());
+        }
+
+        if (canvas == null)
+        {
+            Debug.LogError("Error: Canvas Object not set");
+            return;
+        }
+
+        GameObject weaponsCanvas = canvas.transform.Find("Weapons").gameObject;
+
+        weaponImages = new List<Image>();
+
+        foreach (DefaultWeapon defaultWeapon in defaultWeapons)
+        {
+            defaultWeapon.weaponItem.isPicked = defaultWeapon.isDefault;
+            defaultWeapon.weaponItem.itemType = InventoryItem.ItemType.kItemTypeWeapon;
+            defaultWeapon.weaponItem.index = items[defaultWeapon.weaponItem.itemType].Count;
+            items[defaultWeapon.weaponItem.itemType].Add(defaultWeapon.weaponItem);
+            GameObject newWeaponCanvas = Instantiate(weaponItemTypeCanvas.canvasPrefab);
+            newWeaponCanvas.transform.SetParent(weaponsCanvas.transform);
+            if (defaultWeapon.weaponSprite != null)
+            {
+                newWeaponCanvas.transform.GetChild(1).GetComponent<Image>().sprite = defaultWeapon.weaponSprite;
+                weaponImages.Add(newWeaponCanvas.transform.GetChild(0).GetComponent<Image>());
+                newWeaponCanvas.transform.GetChild(0).GetComponent<Image>().enabled = false;
+                if (defaultWeapon.weaponItem.isPicked)
+                {
+                    newWeaponCanvas.transform.GetChild(1).GetComponent<Image>().color = weaponItemTypeCanvas.pickedColor;
+                }
+                else
+                {
+                    newWeaponCanvas.transform.GetChild(1).GetComponent<Image>().color = weaponItemTypeCanvas.notPickedColor;
+                }
+            }
+        }
+        actualWeaponImageIndex = 0;
+        weaponImages[actualWeaponImageIndex].enabled = true;
+        weaponImages[actualWeaponImageIndex].color = weaponItemTypeCanvas.highlightColor;
+
+    }
+    #endregion
 
 }

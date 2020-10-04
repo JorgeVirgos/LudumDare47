@@ -40,11 +40,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8403382976635825768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad08b9a96dcebe4459f40d67eb424227, type: 3}
+  m_Script: {fileID: 11500000, guid: 36c52d97757806a4584cd5814b517713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemy:
-  - {fileID: 6852326805431045531, guid: 6b856e638321ea342a248dfa84ebef20, type: 3}
-  - {fileID: 6852326805431045531, guid: 5c2f211e100f66c46bb480f052acbd73, type: 3}
-  - {fileID: 6852326805431045531, guid: 391efea7ba5583240b684471e6426d2a, type: 3}
+  - {fileID: 0}
   spawnTime: 6

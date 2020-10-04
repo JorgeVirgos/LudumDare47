@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 public class ComputerBehaviour : MonoBehaviour, IInteractable
 {
-  public string nextSceneName;
-  public Shader shader;
+  public string nextSceneNameFirst;
+  public string nextSceneNameSecond;
+    public Shader shader;
   public GameObject CameraTarget;
   public float TransitionSpeed = 1.0f;
   public MeshRenderer highlightMesh;
@@ -65,9 +66,13 @@ public class ComputerBehaviour : MonoBehaviour, IInteractable
     persitantCamera = persitantCameraGO.GetComponent<Camera>();
     currentCamera = GameObject.FindGameObjectWithTag("Camera").GetComponent<Camera>();
 
-    AsyncOperation ao = SceneManager.LoadSceneAsync(nextSceneName, LoadSceneMode.Additive);
+    
+    if (SceneManager.GetActiveScene().name == nextSceneNameFirst)
+        nextSceneNameFirst = nextSceneNameSecond;
 
-    Debug.Log("Loading Next Scene: " + nextSceneName);
+    AsyncOperation ao = SceneManager.LoadSceneAsync(nextSceneNameFirst, LoadSceneMode.Additive);
+
+    Debug.Log("Loading Next Scene: " + nextSceneNameFirst);
 
     while (!ao.isDone)
     {
@@ -77,7 +82,7 @@ public class ComputerBehaviour : MonoBehaviour, IInteractable
     currentState = State.SceneLoaded;
 
     currentScene = SceneManager.GetActiveScene();
-    nextScene = SceneManager.GetSceneByName(nextSceneName);
+    nextScene = SceneManager.GetSceneByName(nextSceneNameFirst);
     SetRenderTexture(); 
   }
 

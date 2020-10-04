@@ -9,14 +9,11 @@ public class Interact : MonoBehaviour
 
   bool shouldInteract;
 
-  LineDrawer lineDrawer;
-
   void Start()
   {
     parent = transform.parent.gameObject;
     cameraTransform = transform.GetChild(0);
     shouldInteract = false;
-    lineDrawer = new LineDrawer(this.transform, 0.02f);
   }
 
   IInteractable currentInteractable;

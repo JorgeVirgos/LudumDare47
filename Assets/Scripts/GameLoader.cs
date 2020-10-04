@@ -9,7 +9,21 @@ public class GameLoader : MonoBehaviour
 
   void Awake()
   {
-    SceneManager.LoadSceneAsync(FirstLevel);
+    StartCoroutine(WhyAreWeStillHere());
+  }
+
+  IEnumerator WhyAreWeStillHere()
+  {
+    AsyncOperation ao = SceneManager.LoadSceneAsync(FirstLevel, LoadSceneMode.Additive);
+
+    while (!ao.isDone)
+    {
+      yield return null;
+    }
+
+    Scene s = SceneManager.GetSceneByName(FirstLevel);
+    SceneManager.SetActiveScene(s);
+
     Destroy(this.gameObject);
   }
 }

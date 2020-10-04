@@ -41,13 +41,14 @@ public class DoorBehaviour : MonoBehaviour, IInteractable
         OpenDoor();
 
       bool shouldClose = !canOpenDoor && isOpen;
+
       if (shouldClose)
         CloseDoor(false);
     }
 
     if (shouldDestroy)
     {
-      Destroy(this);
+      //Destroy(this);
     }
   }
 
@@ -90,13 +91,17 @@ public class DoorBehaviour : MonoBehaviour, IInteractable
 
   public void OpenDoor()
   {
+    Debug.Log("OpenDoorStart");
     if (transitioning) return;
+    Debug.Log("OpenDoorEnd");
     StartCoroutine(TranslateDoorCor(startPos, target.position, openSpeed, OpenDoorCor()));
   }
 
   private void CloseDoor(bool destroy)
   {
+    Debug.Log("CloseDoorStart");
     if (transitioning) return;
+    Debug.Log("CloseDoorEnd");
     StartCoroutine(TranslateDoorCor(target.position, startPos, openSpeed, CloseDoorCor(destroy)));
   }
   

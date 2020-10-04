@@ -10,6 +10,7 @@ public class DoorBehaviour : MonoBehaviour, IInteractable
   public Transform doorMesh;
   public BoxCollider openTrigger;
   public BoxCollider closeTrigger;
+  public PickableObject.KeyNumber RequiredKey = PickableObject.KeyNumber.kKeyNumberNone;
 
   private Vector3 startPos;
   [HideInInspector]
@@ -21,6 +22,8 @@ public class DoorBehaviour : MonoBehaviour, IInteractable
   [HideInInspector]
   public bool shouldDestroy;
 
+  bool HasKey;
+
   void Start()
   {
     startPos = doorMesh.transform.position;
@@ -29,27 +32,32 @@ public class DoorBehaviour : MonoBehaviour, IInteractable
     isOpen = false;
     shouldDestroy = false;
     InteractableHelper.AddHighlightMaterial(doorMesh.GetComponent<MeshRenderer>());
+    HasKey = RequiredKey != PickableObject.KeyNumber.kKeyNumberNone;
+    if (HasKey)
+    {
+      Color color = PickableObject.GetKeyColor(RequiredKey);
+      Material mat = doorMesh.GetComponent<MeshRenderer>().materials[0];
+      mat.color = color;
+    }
+    
   }
 
   void Update()
   {
-    // if (neededInteractable == null)
+    if (!HasKey)
     {
       bool shouldOpen = canOpenDoor && !isOpen;
 
       if (shouldOpen)
         OpenDoor();
 
-      bool shouldClose = !canOpenDoor && isOpen;
-
-      if (shouldClose)
-        CloseDoor(false);
     }
+    bool shouldClose = !canOpenDoor && isOpen;
 
-    if (shouldDestroy)
-    {
-      //Destroy(this);
-    }
+    if (shouldClose)
+      CloseDoor(shouldDestroy);
+
+    
   }
 
   IEnumerator TranslateDoorCor(Vector3 init, Vector3 end, float speed, IEnumerator onFinish)
@@ -86,6 +94,8 @@ public class DoorBehaviour : MonoBehaviour, IInteractable
   IEnumerator CloseDoorCor(bool destroy)
   {
     isOpen = false;
+    if (destroy)
+      Destroy(this);
     yield break;
   }
 
@@ -107,8 +117,12 @@ public class DoorBehaviour : MonoBehaviour, IInteractable
   
   void IInteractable.Interact(GameObject interactor)
   {
-    // TODO:
-    
+    GameObject go = GameObject.Find("Inventory");
+    InventorySystem iSys = go.GetComponent<InventorySystem>();
+    if (iSys.HasThisKey(RequiredKey))
+    {
+      OpenDoor();
+    }
   }
 
   public void SetHighlightActive(bool active)

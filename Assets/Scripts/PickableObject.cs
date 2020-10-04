@@ -21,11 +21,14 @@ public class PickableObject : InventoryItem {
   void Update() {
     float rotateValue = RotateSpeed * Time.deltaTime;
     transform.Rotate(0.0f, rotateValue, 0.0f);
+
+    float BobbingValue = Mathf.Sin(Time.time) * Time.deltaTime * 0.1f;
+    transform.Translate(0.0f, BobbingValue, 0.0f);
   }
 
   void OnTriggerEnter(Collider collider) {
     if(collider.gameObject.tag == "Player") {
-      InventorySystem Inventory = collider.gameObject.GetComponent<InventorySystem>();
+      InventorySystem Inventory = (collider.gameObject.GetComponent<PlayerController>()).Inventory;
       if(Inventory) {
         switch (itemType) {
           case InventoryItem.ItemType.kItemTypeWeapon:

@@ -134,7 +134,8 @@ public class InventorySystem : MonoBehaviour
             items[defaultWeapon.weaponItem.itemType].Add(defaultWeapon.weaponItem);
             GameObject newWeaponCanvas = Instantiate(weaponCanvasPrefab);
             newWeaponCanvas.transform.SetParent(weaponsCanvas.transform);
-            newWeaponCanvas.GetComponent<Image>().sprite = defaultWeapon.weaponSprite;
+            if (defaultWeapon.weaponSprite != null)
+              newWeaponCanvas.GetComponent<Image>().sprite = defaultWeapon.weaponSprite;
         }
 
     }

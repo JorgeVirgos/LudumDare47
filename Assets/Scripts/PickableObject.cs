@@ -5,7 +5,7 @@ using UnityEngine;
 public class PickableObject : InventoryItem {
 
   public enum KeyNumber {
-    kKeyNumberFirst, 
+    kKeyNumberFirst = 0, 
     kKeyNumberSecond, 
     kKeyNumberThird, 
     kKeyNumberFourth, 

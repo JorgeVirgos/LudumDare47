@@ -614,13 +614,13 @@ MonoBehaviour:
   defaultWeapons:
   - weaponItem: {fileID: 342360003}
     isDefault: 1
-    weaponSprite: {fileID: 0}
+    weaponSprite: {fileID: 21300000, guid: 17ff04b59e557dc428b7eeace0772abf, type: 3}
   - weaponItem: {fileID: 1921682215}
     isDefault: 1
-    weaponSprite: {fileID: 0}
+    weaponSprite: {fileID: 21300000, guid: 78732e1d832905f499e8770736776e1a, type: 3}
   - weaponItem: {fileID: 677270066}
     isDefault: 1
-    weaponSprite: {fileID: 0}
+    weaponSprite: {fileID: 21300000, guid: 2fec47c59a808c84a851e46a75d798f0, type: 3}
 --- !u!4 &1193980080
 Transform:
   m_ObjectHideFlags: 0

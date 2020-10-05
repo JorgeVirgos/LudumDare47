@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealthComponent : MonoBehaviour {
 
@@ -38,8 +39,12 @@ public class HealthComponent : MonoBehaviour {
 
   void Die() {
     if(gameObject.tag == "Player") {
-      // Load Scene
-      return;
+            // Load Scene
+            GameObject mc = GameObject.FindGameObjectWithTag("MainCamera");
+            mc.SetActive(false);
+            // Only specifying the sceneName or sceneBuildIndex will load the Scene with the Single mode
+            SceneManager.LoadScene("Sorpresa");
+            return;
     }
     Destroy(gameObject);
   }

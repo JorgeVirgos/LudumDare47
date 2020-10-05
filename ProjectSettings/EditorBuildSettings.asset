@@ -18,9 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/KevinTest1.unity
     guid: 12aeecc6875be4e4aaf4d58315b7d02d
   - enabled: 1
-    path: Assets/Scenes/SecondLoop.unity
-    guid: 95c1e75292f2436498be427cabeed894
-  - enabled: 1
     path: Assets/Scenes/FirstLoop.unity
     guid: c4085ba8abd805e44ad41c447d270bd1
+  - enabled: 1
+    path: Assets/Scenes/SecondLoop.unity
+    guid: 95c1e75292f2436498be427cabeed894
   m_configObjects: {}

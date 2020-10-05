@@ -149,6 +149,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1805258834394875740}
     m_Modifications:
+    - target: {fileID: 2886840846013969543, guid: 24a9f842c8fa1374b97a4eb50d3b466a,
+        type: 3}
+      propertyPath: ReloadOffset.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886840846013969543, guid: 24a9f842c8fa1374b97a4eb50d3b466a,
+        type: 3}
+      propertyPath: ReloadRotation.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886840846013969543, guid: 24a9f842c8fa1374b97a4eb50d3b466a,
+        type: 3}
+      propertyPath: ReloadRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4926263914227179845, guid: 24a9f842c8fa1374b97a4eb50d3b466a,
         type: 3}
       propertyPath: m_Name

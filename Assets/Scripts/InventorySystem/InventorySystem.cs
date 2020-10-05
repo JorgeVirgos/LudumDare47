@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class InventorySystem : MonoBehaviour
 {
+    private struct CanvasSelectable {
+      public Image Background;
+      public Image Selectable;
+    }
 
     [System.Serializable]
     public struct DefaultWeapon
@@ -40,7 +44,7 @@ public class InventorySystem : MonoBehaviour
     public InventoryItemTypeCanvas weaponItemTypeCanvas;
 
 
-    private List<Image> weaponImages;
+    private List<CanvasSelectable> weaponImages;
     private int actualWeaponImageIndex = 0;
 
     [SerializeField]
@@ -117,11 +121,11 @@ public class InventorySystem : MonoBehaviour
     {
         if (newItem.itemType == InventoryItem.ItemType.kItemTypeWeapon)
         {
-            Weapon w = newItem as Weapon;
+            Weapon w = newItem.gameObject.GetComponent<Weapon>();
             if (w)
             {
                 items[newItem.itemType][(int)w.weaponType].isPicked = true;
-                weaponImages[(int)w.weaponType].color = weaponItemTypeCanvas.pickedColor;
+                weaponImages[(int)w.weaponType].Selectable.color = weaponItemTypeCanvas.pickedColor;
                 return;
             }
         }
@@ -148,10 +152,11 @@ public class InventorySystem : MonoBehaviour
 
     public void SelectWeapon(int weaponIndex)
     {
-        weaponImages[actualWeaponImageIndex].enabled = false;
+        weaponImages[actualWeaponImageIndex].Background.enabled = false;
         //         weaponImages[actualWeaponImageIndex].color = weaponItemTypeCanvas.pickedColor;
-        weaponImages[weaponIndex].color = weaponItemTypeCanvas.highlightColor;
-        weaponImages[weaponIndex].enabled = true;
+        weaponImages[weaponIndex].Background.color = 
+            weaponItemTypeCanvas.highlightColor;
+        weaponImages[weaponIndex].Background.enabled = true;
         actualWeaponImageIndex = weaponIndex;
     }
 
@@ -177,7 +182,7 @@ public class InventorySystem : MonoBehaviour
 
         GameObject weaponsCanvas = canvas.transform.Find("Weapons").gameObject;
 
-        weaponImages = new List<Image>();
+        weaponImages = new List<CanvasSelectable>();
 
         foreach (DefaultWeapon defaultWeapon in defaultWeapons)
         {
@@ -189,22 +194,25 @@ public class InventorySystem : MonoBehaviour
             newWeaponCanvas.transform.SetParent(weaponsCanvas.transform);
             if (defaultWeapon.weaponSprite != null)
             {
-                newWeaponCanvas.transform.GetChild(1).GetComponent<Image>().sprite = defaultWeapon.weaponSprite;
-                weaponImages.Add(newWeaponCanvas.transform.GetChild(0).GetComponent<Image>());
-                newWeaponCanvas.transform.GetChild(0).GetComponent<Image>().enabled = false;
+                CanvasSelectable newSelectable = new CanvasSelectable();
+                newSelectable.Background = newWeaponCanvas.transform.GetChild(0).GetComponent<Image>();
+                newSelectable.Selectable = newWeaponCanvas.transform.GetChild(1).GetComponent<Image>();
+                newSelectable.Selectable.sprite = defaultWeapon.weaponSprite;
+                newSelectable.Background.enabled = false;
                 if (defaultWeapon.weaponItem.isPicked)
                 {
-                    newWeaponCanvas.transform.GetChild(1).GetComponent<Image>().color = weaponItemTypeCanvas.pickedColor;
+                    newSelectable.Selectable.color = weaponItemTypeCanvas.pickedColor;
                 }
                 else
                 {
-                    newWeaponCanvas.transform.GetChild(1).GetComponent<Image>().color = weaponItemTypeCanvas.notPickedColor;
+                    newSelectable.Selectable.color = weaponItemTypeCanvas.notPickedColor;
                 }
+                weaponImages.Add(newSelectable);
             }
         }
         actualWeaponImageIndex = 0;
-        weaponImages[actualWeaponImageIndex].enabled = true;
-        weaponImages[actualWeaponImageIndex].color = weaponItemTypeCanvas.highlightColor;
+        weaponImages[actualWeaponImageIndex].Background.enabled = true;
+        weaponImages[actualWeaponImageIndex].Background.color = weaponItemTypeCanvas.highlightColor;
 
     }
     #endregion

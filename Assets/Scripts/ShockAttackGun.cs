@@ -21,11 +21,11 @@ public class ShockAttackGun : Weapon{
     {
         CurrentShotCooldown -= Time.deltaTime;
     }
-    public override void Shoot()
+    public override bool Shoot()
     {
         if (CurrentShotCooldown <= 0.0f)
         {
-            base.Shoot();
+            if(!base.Shoot()) return false;
             GameObject obj = Instantiate(Projectile, child.position, Quaternion.identity);
             if (obj)
             {
@@ -43,6 +43,7 @@ public class ShockAttackGun : Weapon{
                 }
             }
         }
+        return true;
     }
     
 }

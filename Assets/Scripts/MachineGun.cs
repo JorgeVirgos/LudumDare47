@@ -19,12 +19,13 @@ public class MachineGun : Weapon {
 
   // Update is called once per frame
   void Update() {
+    base.Update();
     CurrentShotCooldown -= Time.deltaTime;
   }
 
-  public override void Shoot() {
+  public override bool Shoot() {
     if (CurrentShotCooldown <= 0.0f) {
-      base.Shoot();
+      if(!base.Shoot()) return false;
       GameObject obj = Instantiate(Projectile, child.position, Quaternion.identity);
       if(obj) {
         BasicProjectile prj = obj.GetComponent<BasicProjectile>();
@@ -34,10 +35,8 @@ public class MachineGun : Weapon {
         }
         CurrentShotCooldown = ShotCooldown;
         bIsShooting = true;
-        if(CurrentClipAmmo <= 0) {
-          Reload();
-        }
       }
     }
+    return true;
   }
 }

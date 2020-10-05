@@ -23,12 +23,13 @@ public class Shotgun : Weapon {
 
   // Update is called once per frame
   void Update() {
+    base.Update();
     CurrentShotCooldown -= Time.deltaTime;
   }
 
-  public override void Shoot() {
-    if(CurrentShotCooldown <= 0.0f) {
-      base.Shoot();
+  public override bool Shoot() {
+    if(CurrentShotCooldown <= 0.0f && !bIsShooting) {
+      if(!base.Shoot()) return false;
       for(int i = 0; i < NumberOfPellets; ++i) {
         float yRotation = 25 * i - 50;
         Quaternion rotation = Quaternion.Euler(new Vector3(0.0f, yRotation, 0.0f));
@@ -46,9 +47,7 @@ public class Shotgun : Weapon {
       }
       CurrentShotCooldown = ShotCooldown;
       bIsShooting = true;
-      if (CurrentClipAmmo <= 0) {
-        Reload();
-      }
     }
+    return true;
   }
 }

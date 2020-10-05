@@ -63,7 +63,7 @@ public class PickableObject : InventoryItem {
           case InventoryItem.ItemType.kItemTypeWeapon:
             {
               Inventory.GrabItem(this);
-              gameObject.SetActive(false);
+              Destroy(gameObject);
             }break;
           case InventoryItem.ItemType.kItemTypeAmmo:
             {
@@ -74,16 +74,19 @@ public class PickableObject : InventoryItem {
                   w.RecoverAmmo(w.MaxAmmo / 3);
                 }
               }
+              Destroy(gameObject);
             }break;
           case InventoryItem.ItemType.kItemTypeHP:
             {
               HealthComponent health = collider.gameObject.GetComponent<HealthComponent>();
               if(health) health.Heal(HealAmount);
+              Destroy(gameObject);
             }break;
           case InventoryItem.ItemType.kItemTypeArmour:
             {
               HealthComponent health = collider.gameObject.GetComponent<HealthComponent>();
               if(health) health.RestoreArmor(ArmorAmount);
+              Destroy(gameObject);
             }break;
           case InventoryItem.ItemType.kItemTypePowerUp:
             {

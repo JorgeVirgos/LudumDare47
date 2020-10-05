@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class InventorySystem : MonoBehaviour
 {
-    private struct CanvasSelectable {
-      public Image Background;
-      public Image Selectable;
+    private struct CanvasSelectable
+    {
+        public Image Background;
+        public Image Selectable;
     }
 
     [System.Serializable]
@@ -67,6 +68,111 @@ public class InventorySystem : MonoBehaviour
         return false;
     }
 
+    public void ReloadInventory(GameObject player)
+    {
+
+
+        InventoryItem pistol = player.transform.GetChild(0).GetChild(0).GetComponent<InventoryItem>();
+        InventoryItem smg = player.transform.GetChild(0).GetChild(1).GetComponent<InventoryItem>();
+        InventoryItem shotgun = player.transform.GetChild(0).GetChild(2).GetComponent<InventoryItem>();
+
+        player.GetComponent<PlayerController>().CurrentWeapon = pistol as Weapon;
+
+        DefaultWeapon dw = defaultWeapons[0];
+        dw.weaponItem = pistol;
+        defaultWeapons[0] = dw;
+
+        dw = defaultWeapons[1];
+        dw.weaponItem = smg;
+        defaultWeapons[1] = dw;
+
+        dw = defaultWeapons[2];
+        dw.weaponItem = shotgun;
+        defaultWeapons[2] = dw;
+
+        canvas = player.transform.GetChild(0).GetChild(3).gameObject;
+
+        createWeaponCanvas(false);
+
+    }
+
+    public void createWeaponCanvas(bool firstTime = true)
+    {
+        GameObject weaponsCanvas = canvas.transform.Find("Weapons").gameObject;
+        weaponImages = new List<CanvasSelectable>();
+
+        if (firstTime)
+        {
+            foreach (DefaultWeapon defaultWeapon in defaultWeapons)
+            {
+                defaultWeapon.weaponItem.isPicked = defaultWeapon.isDefault;
+                defaultWeapon.weaponItem.itemType = InventoryItem.ItemType.kItemTypeWeapon;
+                defaultWeapon.weaponItem.index = items[defaultWeapon.weaponItem.itemType].Count;
+                items[defaultWeapon.weaponItem.itemType].Add(defaultWeapon.weaponItem);
+                GameObject newWeaponCanvas = Instantiate(weaponItemTypeCanvas.canvasPrefab);
+                newWeaponCanvas.transform.SetParent(weaponsCanvas.transform);
+                if (defaultWeapon.weaponSprite != null)
+                {
+                    CanvasSelectable newSelectable = new CanvasSelectable();
+                    newSelectable.Background = newWeaponCanvas.transform.GetChild(0).GetComponent<Image>();
+                    newSelectable.Selectable = newWeaponCanvas.transform.GetChild(1).GetComponent<Image>();
+                    newSelectable.Selectable.sprite = defaultWeapon.weaponSprite;
+                    newSelectable.Background.enabled = false;
+                    if (defaultWeapon.weaponItem.isPicked)
+                    {
+                        newSelectable.Selectable.color = weaponItemTypeCanvas.pickedColor;
+                    }
+                    else
+                    {
+                        newSelectable.Selectable.color = weaponItemTypeCanvas.notPickedColor;
+                    }
+                    weaponImages.Add(newSelectable);
+                }
+            }
+            actualWeaponImageIndex = 0;
+            weaponImages[actualWeaponImageIndex].Background.enabled = true;
+            weaponImages[actualWeaponImageIndex].Background.color = weaponItemTypeCanvas.highlightColor;
+
+        }
+        else
+        {
+            int index = 0;
+            foreach (DefaultWeapon defaultWeapon in defaultWeapons)
+            {
+                defaultWeapon.weaponItem.isPicked = defaultWeapon.isDefault;
+                defaultWeapon.weaponItem.itemType = InventoryItem.ItemType.kItemTypeWeapon;
+                defaultWeapon.weaponItem.index = index;
+                items[defaultWeapon.weaponItem.itemType][index] = defaultWeapon.weaponItem;
+
+                GameObject newWeaponCanvas = Instantiate(weaponItemTypeCanvas.canvasPrefab);
+                newWeaponCanvas.transform.SetParent(weaponsCanvas.transform);
+                if (defaultWeapon.weaponSprite != null)
+                {
+                    CanvasSelectable newSelectable = new CanvasSelectable();
+                    newSelectable.Background = newWeaponCanvas.transform.GetChild(0).GetComponent<Image>();
+                    newSelectable.Selectable = newWeaponCanvas.transform.GetChild(1).GetComponent<Image>();
+                    newSelectable.Selectable.sprite = defaultWeapon.weaponSprite;
+                    newSelectable.Background.enabled = false;
+                    if (defaultWeapon.weaponItem.isPicked)
+                    {
+                        newSelectable.Selectable.color = weaponItemTypeCanvas.pickedColor;
+                    }
+                    else
+                    {
+                        newSelectable.Selectable.color = weaponItemTypeCanvas.notPickedColor;
+                    }
+                    weaponImages.Add(newSelectable);
+                }
+
+                ++index;
+            }
+            actualWeaponImageIndex = 0;
+            weaponImages[actualWeaponImageIndex].Background.enabled = true;
+            weaponImages[actualWeaponImageIndex].Background.color = weaponItemTypeCanvas.highlightColor;
+
+        }
+
+    }
 
 
     public List<InventoryItem> GetAllInventoryItems()
@@ -154,7 +260,7 @@ public class InventorySystem : MonoBehaviour
     {
         weaponImages[actualWeaponImageIndex].Background.enabled = false;
         //         weaponImages[actualWeaponImageIndex].color = weaponItemTypeCanvas.pickedColor;
-        weaponImages[weaponIndex].Background.color = 
+        weaponImages[weaponIndex].Background.color =
             weaponItemTypeCanvas.highlightColor;
         weaponImages[weaponIndex].Background.enabled = true;
         actualWeaponImageIndex = weaponIndex;
@@ -180,39 +286,7 @@ public class InventorySystem : MonoBehaviour
             return;
         }
 
-        GameObject weaponsCanvas = canvas.transform.Find("Weapons").gameObject;
-
-        weaponImages = new List<CanvasSelectable>();
-
-        foreach (DefaultWeapon defaultWeapon in defaultWeapons)
-        {
-            defaultWeapon.weaponItem.isPicked = defaultWeapon.isDefault;
-            defaultWeapon.weaponItem.itemType = InventoryItem.ItemType.kItemTypeWeapon;
-            defaultWeapon.weaponItem.index = items[defaultWeapon.weaponItem.itemType].Count;
-            items[defaultWeapon.weaponItem.itemType].Add(defaultWeapon.weaponItem);
-            GameObject newWeaponCanvas = Instantiate(weaponItemTypeCanvas.canvasPrefab);
-            newWeaponCanvas.transform.SetParent(weaponsCanvas.transform);
-            if (defaultWeapon.weaponSprite != null)
-            {
-                CanvasSelectable newSelectable = new CanvasSelectable();
-                newSelectable.Background = newWeaponCanvas.transform.GetChild(0).GetComponent<Image>();
-                newSelectable.Selectable = newWeaponCanvas.transform.GetChild(1).GetComponent<Image>();
-                newSelectable.Selectable.sprite = defaultWeapon.weaponSprite;
-                newSelectable.Background.enabled = false;
-                if (defaultWeapon.weaponItem.isPicked)
-                {
-                    newSelectable.Selectable.color = weaponItemTypeCanvas.pickedColor;
-                }
-                else
-                {
-                    newSelectable.Selectable.color = weaponItemTypeCanvas.notPickedColor;
-                }
-                weaponImages.Add(newSelectable);
-            }
-        }
-        actualWeaponImageIndex = 0;
-        weaponImages[actualWeaponImageIndex].Background.enabled = true;
-        weaponImages[actualWeaponImageIndex].Background.color = weaponItemTypeCanvas.highlightColor;
+        createWeaponCanvas(true);
 
     }
     #endregion

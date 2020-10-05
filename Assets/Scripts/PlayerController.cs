@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
   public Vector3 ExternalInput;
 
   public InventorySystem Inventory;
-  private Weapon CurrentWeapon;
+  internal Weapon CurrentWeapon;
   private float horizontalInput;
   private float verticalInput;
   private Rigidbody playerRB;

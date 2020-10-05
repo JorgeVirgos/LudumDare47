@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 948715272678377836}
   - component: {fileID: 959899729179335674}
   - component: {fileID: 970149320215925372}
+  - component: {fileID: 8799601606249923465}
   m_Layer: 0
   m_Name: EWall
   m_TagString: Untagged
@@ -159,6 +160,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &8799601606249923465
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945860344905452102}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.35085106, y: 4.5584946, z: 8.751497}
+  m_Center: {x: -0.0000019073486, y: 0.00000035762787, z: 0.00000013004649}
 --- !u!1 &952036525209575523
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,6 +317,7 @@ GameObject:
   - component: {fileID: 1981967896264593802}
   - component: {fileID: 2015890216427291420}
   - component: {fileID: 2007892287830444698}
+  - component: {fileID: 1547819723645554650}
   m_Layer: 0
   m_Name: WWall
   m_TagString: Untagged
@@ -371,6 +386,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1547819723645554650
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984821036660036256}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.35085106, y: 4.5584946, z: 8.751497}
+  m_Center: {x: -0.0000019073486, y: 0.00000035762787, z: 0.00000013004649}
 --- !u!1 &3222493616390938821
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,6 +410,7 @@ GameObject:
   - component: {fileID: 3220713261217244143}
   - component: {fileID: 3227666488416514425}
   - component: {fileID: 3237647831834261759}
+  - component: {fileID: 8132792914842447759}
   m_Layer: 0
   m_Name: SWall
   m_TagString: Untagged
@@ -450,6 +479,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &8132792914842447759
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3222493616390938821}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.35085118, y: 4.5584946, z: 8.751499}
+  m_Center: {x: -0.0000014305122, y: 0.00000035762787, z: 0.00000023841864}
 --- !u!1 &3472984501524359733
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,6 +595,7 @@ GameObject:
   - component: {fileID: 4577572783905909267}
   - component: {fileID: 4611248438493116549}
   - component: {fileID: 4601240763597074691}
+  - component: {fileID: 978132603700509659}
   m_Layer: 0
   m_Name: NWall
   m_TagString: Untagged
@@ -621,6 +664,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &978132603700509659
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4579056133368015161}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.35085118, y: 4.5584946, z: 8.751499}
+  m_Center: {x: -0.0000014305122, y: 0.00000035762787, z: 0.00000023841864}
 --- !u!1001 &1401158537442513969
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -109,8 +109,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ImpulseDirection: {x: 0, y: 0, z: 0}
   Impulse: 100
-  aliveTime: 1
+  aliveTime: 3
   Damage: 10
+  bulletClips:
+  - {fileID: 8300000, guid: 701ee1a4bbe3f8b489d721013312b8e4, type: 3}
+  - {fileID: 8300000, guid: a5c8feb486c72d14fa839ecc46b23bc7, type: 3}
+  - {fileID: 8300000, guid: ffa1b3c98975f19488ba73218d909bf3, type: 3}
+  - {fileID: 8300000, guid: 8e2c11c178ab990449aaa473dea2a50a, type: 3}
+  - {fileID: 8300000, guid: dc01429ef7e403042a39aa35bf0fd70c, type: 3}
 --- !u!54 &5742205205125644377
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -81,6 +81,7 @@ MonoBehaviour:
   RotateSpeed: 50
   HealAmount: 30
   ArmorAmount: 30
+  PickUpSound: {fileID: 8300000, guid: cd98dc463d927f849853a0c9fe088c88, type: 3}
 --- !u!114 &4565639657764809526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,6 +105,9 @@ MonoBehaviour:
   ReloadSound: {fileID: 0}
   EmptyClipSound: {fileID: 0}
   ReloadOffset: {x: 0, y: 0, z: 0}
+  ReloadRotation: {x: 0, y: 0, z: 0}
+  ShootingOffset: {x: 0, y: 0, z: 0}
+  ShootingRotation: {x: 0, y: 0, z: 0}
   ReloadTime: 0
   ReloadCurve:
     serializedVersion: 2
@@ -111,6 +115,16 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  ShootingCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  MinShootPitch: 0
+  MaxShootPitch: 0
+  ClipAmmoText: {fileID: 0}
+  MaxAmmoText: {fileID: 0}
 --- !u!1001 &911719762708557171
 PrefabInstance:
   m_ObjectHideFlags: 0

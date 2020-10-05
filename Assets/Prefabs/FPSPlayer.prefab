@@ -233,6 +233,7 @@ MonoBehaviour:
   FPSCamera: {fileID: 2728002580218983385}
   ReloadKey: 114
   jumpFix: 0.125
+  ExternalInput: {x: 0, y: 0, z: 0}
   Inventory: {fileID: 0}
 --- !u!136 &2728002580156730931
 CapsuleCollider:
@@ -1070,6 +1071,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
         type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
       propertyPath: ClipAmmoText
       value: 
       objectReference: {fileID: 1873067402799335086}
@@ -1082,6 +1088,111 @@ PrefabInstance:
         type: 3}
       propertyPath: MaxAmmo
       value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: RecoilOffset.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: RecoilOffset.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: RecoilOffset.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: ReloadCurve.m_Curve.Array.data[1].time
+      value: 0.49910164
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: ReloadCurve.m_Curve.Array.data[1].inSlope
+      value: 0.015470697
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: ReloadCurve.m_Curve.Array.data[1].outSlope
+      value: 0.015470697
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: ReloadCurve.m_Curve.Array.data[1].outWeight
+      value: 0.1361253
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: ReloadCurve.m_Curve.Array.data[1].value
+      value: 0.99890184
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[1].time
+      value: 0.09664285
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[1].value
+      value: 1.0037433
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[1].inSlope
+      value: 0.06402261
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[1].outSlope
+      value: 0.06402261
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[1].outWeight
+      value: 0.17656164
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[2].time
+      value: 0.19915771
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[2].value
+      value: 0.011806488
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: ShootingOffset.z
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[2].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[2].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[2].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[2].outWeight
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4306952948602448607, guid: e1b023f1ae42e8442bde2bf95d025569,
         type: 3}
@@ -1165,6 +1276,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2886840846013969543, guid: 24a9f842c8fa1374b97a4eb50d3b466a,
         type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886840846013969543, guid: 24a9f842c8fa1374b97a4eb50d3b466a,
+        type: 3}
       propertyPath: ClipAmmoText
       value: 
       objectReference: {fileID: 1873067402799335086}
@@ -1173,6 +1289,51 @@ PrefabInstance:
       propertyPath: MaxAmmoText
       value: 
       objectReference: {fileID: 7579443694505866119}
+    - target: {fileID: 2886840846013969543, guid: 24a9f842c8fa1374b97a4eb50d3b466a,
+        type: 3}
+      propertyPath: ShootingRotation.x
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886840846013969543, guid: 24a9f842c8fa1374b97a4eb50d3b466a,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[1].time
+      value: 0.3998757
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886840846013969543, guid: 24a9f842c8fa1374b97a4eb50d3b466a,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[1].value
+      value: 0.9962273
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886840846013969543, guid: 24a9f842c8fa1374b97a4eb50d3b466a,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[1].inSlope
+      value: -0.0035361946
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886840846013969543, guid: 24a9f842c8fa1374b97a4eb50d3b466a,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[1].outSlope
+      value: -0.0035361946
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886840846013969543, guid: 24a9f842c8fa1374b97a4eb50d3b466a,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886840846013969543, guid: 24a9f842c8fa1374b97a4eb50d3b466a,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886840846013969543, guid: 24a9f842c8fa1374b97a4eb50d3b466a,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[2].time
+      value: 0.5015869
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886840846013969543, guid: 24a9f842c8fa1374b97a4eb50d3b466a,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[2].value
+      value: -0.004737854
+      objectReference: {fileID: 0}
     - target: {fileID: 4926263914227179845, guid: 24a9f842c8fa1374b97a4eb50d3b466a,
         type: 3}
       propertyPath: m_Name
@@ -1320,6 +1481,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
         type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
+        type: 3}
       propertyPath: ClipAmmoText
       value: 
       objectReference: {fileID: 1873067402799335086}
@@ -1328,6 +1494,96 @@ PrefabInstance:
       propertyPath: MaxAmmoText
       value: 
       objectReference: {fileID: 7579443694505866119}
+    - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
+        type: 3}
+      propertyPath: RecoilOffset.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
+        type: 3}
+      propertyPath: RecoilOffset.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
+        type: 3}
+      propertyPath: RecoilOffset.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
+        type: 3}
+      propertyPath: ShootingRotation.x
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[1].time
+      value: 0.050128784
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[1].value
+      value: 1.0010107
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[1].inSlope
+      value: 0.71595085
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[1].outSlope
+      value: 0.71595085
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[2].time
+      value: 0.09968567
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[2].value
+      value: -0.0000076293945
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[0].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[0].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143431762390839411, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4,
+        type: 3}
+      propertyPath: ShootingCurve.m_Curve.Array.data[0].outWeight
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fd9fb3ac4e379c42b3c399d04a79cd4, type: 3}
 --- !u!4 &7975573733998766830 stripped

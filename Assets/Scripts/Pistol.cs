@@ -30,6 +30,7 @@ public class Pistol : Weapon {
       if(obj) {
         BasicProjectile prj = obj.GetComponent<BasicProjectile>();
         if(prj) {
+          CurrentShootingTime = 0.0f;
           prj.Damage = WeaponDamage;
           prj.ImpulseDirection = transform.parent.transform.forward;
         }

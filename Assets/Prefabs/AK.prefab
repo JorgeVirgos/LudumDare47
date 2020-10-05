@@ -83,6 +83,44 @@ MonoBehaviour:
   bIsShooting: 0
   MaxAmmo: 150
   MaxClipAmmo: 30
+  ShootSound: {fileID: 8300000, guid: bf3ea7f06a45c7a409ffffe7458076f1, type: 3}
+  ReloadSound: {fileID: 8300000, guid: 57e37894addbc8943aaeba303d96cf01, type: 3}
+  EmptyClipSound: {fileID: 8300000, guid: b9110e7af6c01c842b99b07e19d948ee, type: 3}
+  ReloadOffset: {x: 0, y: -1, z: 0}
+  ReloadTime: 1
+  ReloadCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.50054
+      value: 0.9964748
+      inSlope: 1.4999667
+      outSlope: 1.4999667
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.99853516
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &7167292794403530153
 PrefabInstance:
   m_ObjectHideFlags: 0

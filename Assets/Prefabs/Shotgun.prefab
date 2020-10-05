@@ -83,6 +83,44 @@ MonoBehaviour:
   bIsShooting: 0
   MaxAmmo: 30
   MaxClipAmmo: 2
+  ShootSound: {fileID: 8300000, guid: 69e37cda088a6d04198961395492029f, type: 3}
+  ReloadSound: {fileID: 8300000, guid: 6441b70d8e797714598a945bd7c4cc6f, type: 3}
+  EmptyClipSound: {fileID: 8300000, guid: b9110e7af6c01c842b99b07e19d948ee, type: 3}
+  ReloadOffset: {x: 0, y: -1, z: 0}
+  ReloadTime: 1
+  ReloadCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.49981493
+      value: 0.9999132
+      inSlope: 1.499984
+      outSlope: 1.499984
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: -0.0047187805
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   NumberOfPellets: 10
   DispersionAngle: 0.5
   DispersionDistance: 2

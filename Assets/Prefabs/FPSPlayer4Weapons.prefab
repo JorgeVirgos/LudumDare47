@@ -101,6 +101,8 @@ MonoBehaviour:
   bIsShooting: 0
   MaxAmmo: 30
   MaxClipAmmo: 2
+  ShootSound: {fileID: 0}
+  ReloadSound: {fileID: 0}
   NumberOfPellets: 10
   DispersionAngle: 0.5
   DispersionDistance: 2
@@ -296,6 +298,8 @@ MonoBehaviour:
   bIsShooting: 0
   MaxAmmo: 150
   MaxClipAmmo: 15
+  ShootSound: {fileID: 0}
+  ReloadSound: {fileID: 0}
 --- !u!1 &4373658333375107553
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,6 +310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4373658333375107552}
   - component: {fileID: 4373658333375107555}
+  - component: {fileID: 2725067598911819650}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Camera
@@ -375,6 +380,14 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!81 &2725067598911819650
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4373658333375107553}
+  m_Enabled: 1
 --- !u!1 &4373658333431360519
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,6 +447,7 @@ MonoBehaviour:
   FPSCamera: {fileID: 4373658333375107555}
   ReloadKey: 114
   jumpFix: 0.125
+  Inventory: {fileID: 0}
 --- !u!136 &4373658333431360521
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -477,8 +491,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 4809591569421936457}
-  weaponCanvasPrefab: {fileID: 7404203263658626185, guid: e6cd89c6a185d5b4b96581c9c00b43c8,
-    type: 3}
+  weaponItemTypeCanvas:
+    canvasPrefab: {fileID: 0}
+    notPickedColor: {r: 0, g: 0, b: 0, a: 0}
+    pickedColor: {r: 0, g: 0, b: 0, a: 0}
+    highlightColor: {r: 0, g: 0, b: 0, a: 0}
   defaultWeapons:
   - weaponItem: {fileID: 4373658331890447013}
     isDefault: 1
@@ -839,6 +856,8 @@ MonoBehaviour:
   bIsShooting: 0
   MaxAmmo: 150
   MaxClipAmmo: 30
+  ShootSound: {fileID: 0}
+  ReloadSound: {fileID: 0}
 --- !u!1001 &778447689151198914
 PrefabInstance:
   m_ObjectHideFlags: 0

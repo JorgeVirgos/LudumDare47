@@ -18,6 +18,10 @@ public class Weapon : InventoryItem {
   public int MaxClipAmmo;
   public AudioClip ShootSound;
   public AudioClip ReloadSound;
+  public AudioClip EmptyClipSound;
+  public Vector3 ReloadOffset;
+  public float ReloadTime;
+  public AnimationCurve ReloadCurve;
 
   internal WeaponType weaponType;
 
@@ -27,33 +31,83 @@ public class Weapon : InventoryItem {
   protected float AmmunitionQuantity;
 
   private AudioSource AudioComp;
+  private bool bIsReloading;
+  private Vector3 LocalPosition;
+  private float CurrentReloadTime;
 
-  // Start is called before the first frame update
-  void Start() {
+  void Awake() {
     CurrentShotCooldown = ShotCooldown;
     bIsShooting = false;
     CurrentAmmo = MaxAmmo;
     CurrentClipAmmo = MaxClipAmmo;
+    LocalPosition = transform.localPosition;
+    CurrentReloadTime = 0.0f;
+    if(!AudioComp)
+      AudioComp = gameObject.AddComponent<AudioSource>();
+    AudioComp.clip = EmptyClipSound;
   }
 
   // Update is called once per frame
-  void Update() {
+  protected void Update() {
+
+    if(bIsReloading) {
+      float CurveValue = ReloadCurve.Evaluate(CurrentReloadTime);
+      transform.localPosition = LocalPosition + (ReloadOffset * CurveValue);
+      CurrentReloadTime += Time.deltaTime;
+      if(CurrentReloadTime >= ReloadTime) {
+        CurrentReloadTime = 0.0f;
+        bIsReloading = false;
+        if(CurrentAmmo >= MaxClipAmmo) {
+          CurrentClipAmmo = MaxClipAmmo;
+          CurrentAmmo -= MaxClipAmmo;
+        } else {
+          CurrentClipAmmo = CurrentAmmo;
+          CurrentAmmo = 0;
+        }
+      }
+    }
+
+
+    /*if(bIsReloading) {
+      Vector3 position = Vector3.Lerp(LocalPosition, LocalPosition + ReloadOffset, ReloadTime * 0.5f);
+      if(position == (LocalPosition + ReloadOffset)) {
+        bIsReloading = false;
+      }
+    } else {
+      Vector3 position = Vector3.Lerp(LocalPosition + ReloadOffset, LocalPosition, ReloadTime * 0.5f);
+    }*/
   }
 
-  public virtual void Shoot() {
+  public virtual bool Shoot() {
+    if(bIsReloading) return false;
+    if(CurrentClipAmmo <= 0) {
+      Reload();
+      return false;
+    }
     CurrentClipAmmo -= 1;
-    AudioComp.PlayOneShot(ShootSound);
+    if(ShootSound)
+      AudioComp.PlayOneShot(ShootSound);
+    return true;
   }
 
   public void Reload() {
-    AudioComp.PlayOneShot(ReloadSound);
-    if(CurrentAmmo >= MaxClipAmmo) {
+    if(CurrentAmmo == 0) {
+      if(!AudioComp.isPlaying)
+        AudioComp.Play();
+        return;
+    }
+    if(CurrentClipAmmo == MaxClipAmmo) return;
+    if(bIsReloading) return;
+    if(ReloadSound)
+      AudioComp.PlayOneShot(ReloadSound);
+    bIsReloading = true;
+    /*if(CurrentAmmo >= MaxClipAmmo) {
       CurrentClipAmmo = MaxClipAmmo;
       CurrentAmmo -= MaxClipAmmo;
     } else {
       CurrentClipAmmo = CurrentAmmo;
       CurrentAmmo = 0;
-    }
+    }*/
   }
 
   public void RecoverAmmo(int ammo) {

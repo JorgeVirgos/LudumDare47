@@ -506,7 +506,8 @@ MonoBehaviour:
   - weaponItem: {fileID: 3947745974202828161}
     isDefault: 1
     weaponSprite: {fileID: 0}
-  - weaponItem: {fileID: 0}
+  - weaponItem: {fileID: 815897630933930502, guid: 0905f80c8baed04418f2063d50a5943d,
+      type: 3}
     isDefault: 1
     weaponSprite: {fileID: 0}
 --- !u!114 &1831158483227709570

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 173699124791403789}
   - component: {fileID: 166426963089384745}
   - component: {fileID: 3556350390427392437}
+  - component: {fileID: 3584966150919305061}
   m_Layer: 0
   m_Name: suelo
   m_TagString: LongRangedRoom
@@ -111,6 +112,35 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8.751498, y: 0.12264058, z: 8.751498}
   m_Center: {x: 0, y: 0.26120174, z: -1.528485}
+--- !u!114 &3584966150919305061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151464787596478679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 23800000, guid: 3537dba29e643e648b80d2ca1096eb7b, type: 2}
 --- !u!1 &773929634960750993
 GameObject:
   m_ObjectHideFlags: 0

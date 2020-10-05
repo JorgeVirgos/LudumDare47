@@ -520,8 +520,9 @@ public class LevelManager : MonoBehaviour
         RoomNode starting_room  = new RoomNode(id_counter++);
         RoomNode first_room  = new RoomNode(id_counter++);
         RoomNode computer_room = new RoomNode(id_counter++);
+        RoomNode skyrim_room = new RoomNode(id_counter++);
         computer_room.room_prefab_ = (GameObject)FindRoomType("ComputerRoom");
-
+        skyrim_room.room_prefab_ = (GameObject)FindRoomType("emptyRoom");
         starting_room.room_prefab_ = (GameObject) FindRoomType("emptyRoom");
         first_room.room_prefab_ = starting_room.room_prefab_;
 
@@ -535,28 +536,47 @@ public class LevelManager : MonoBehaviour
         locked_room.AddLockedDoor(CardinalDirection.West, 2);
         rooms_[locked_count] = locked_room;
 
-        CreatePassageway(ref rooms_, ref id_counter, 1, CardinalDirection.North, 3);
+        int other_weapon_int = CreatePassageway(ref rooms_, ref id_counter, rooms_.Count - 1, CardinalDirection.North, 3);
+
+        RoomNode weapon_room = rooms_[other_weapon_int];
+        weapon_room.room_prefab_ = (GameObject)FindRoomType("spawnerRoomAK");
+
+        rooms_[other_weapon_int] = weapon_room;
         RoomNode last = rooms_[rooms_.Count - 1];
+        computer_room.ConE(ref last);
+        last.room_prefab_ = (GameObject)FindRoomType("spawnerRoomKey3");
+        last.AddLockedDoor(CardinalDirection.West, 3);
+        rooms_[rooms_.Count - 1] = last;
+
+        CreatePassageway(ref rooms_, ref id_counter, 1, CardinalDirection.North, 3);
+        last = rooms_[rooms_.Count - 1];
         last.room_prefab_ = (GameObject)FindRoomType("spawnerRoomKey1");
         computer_room.ConS(ref last);
         rooms_[rooms_.Count - 1] = last;
 
         int route_to_key_1 = CreatePassageway(ref rooms_, ref id_counter, 1, CardinalDirection.West, 1);
 
-        RoomNode weapon_room = rooms_[route_to_key_1];
+        weapon_room = rooms_[route_to_key_1];
         weapon_room.AddLockedDoor(CardinalDirection.East, 1);
-        weapon_room.room_prefab_ = (GameObject)FindRoomType("emptyRoom");
+        weapon_room.room_prefab_ = (GameObject)FindRoomType("spawnerRoomSG");
+        rooms_[route_to_key_1] = weapon_room;
         CreatePassageway(ref rooms_, ref id_counter, route_to_key_1, CardinalDirection.North, 5);
 
         RoomNode armor_room = rooms_[rooms_.Count - 2]; armor_room.room_prefab_ = (GameObject)FindRoomType("spawnerRoomArmor");
         rooms_[rooms_.Count - 2] = armor_room;
 
         RoomNode key_room = rooms_[rooms_.Count - 1]; armor_room.room_prefab_ = (GameObject)FindRoomType("spawnerRoomKey2");
-        computer_room.ConE(ref key_room);
-        rooms_[rooms_.Count - 1] = armor_room;
+        key_room.AddLockedDoor(CardinalDirection.East, 2);
+        computer_room.ConW(ref key_room);
+        rooms_[rooms_.Count - 1] = key_room;
 
+
+
+        skyrim_room.ConS(ref computer_room);
+        skyrim_room.AddLockedDoor(CardinalDirection.South, 3);
 
         rooms_.Add(computer_room);
+        rooms_.Add(skyrim_room);
 
 
 

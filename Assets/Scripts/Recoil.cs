@@ -8,8 +8,8 @@ public class Recoil : MonoBehaviour
    // Transform of the camera to shake. Grabs the gameObject's transform
 	// if null.
 	public Transform camTransform;
-	public bool doit = true;
 	public int recoil_type;
+	public bool isShooting=false;
 	// How long the object should shake for.
 	private float shakeAmount;
 	private Boolean returnToCam=false;
@@ -26,50 +26,91 @@ public class Recoil : MonoBehaviour
 			camTransform = GetComponent(typeof(Transform)) as Transform;
 		}
 	}
-	
-	void OnEnable()
-	{
-		originalPos = camTransform.localPosition;
+	void addRecoil() {
+		switch (recoil_type)
+		{
+			//rifle
+			case 1:
+				if (shakeAmount < 0.6f)
+				{
+					shakeAmount += 0.01f;
+					if (shakeAmount > 0.55) {
+						returnToCam = false;
+					}
+				}
+				break;
+			//shotgun
+			case 2:
+				if (shakeAmount < 0.6f)
+				{
+					shakeAmount += 0.05f;
+				}
+				break;
+		}
+	}
+	void SetVars(bool setAll)
+    {
 		switch (recoil_type)
 		{
 			//pistol
 			case 0:
-				shakeAmount = 0.05f;
+				if (setAll) { shakeAmount = 0.05f; }
 				shakeDuration = 0.1f;
 				decreaseFactor = 0.1f;
 				returnToCam = true;
 				break;
 			//rifle
 			case 1:
-				shakeAmount = 0.6f;
+				if (setAll) { shakeAmount = 0.5f; }
 				shakeDuration = 0.1f;
-				decreaseFactor = 0.001f;
+				decreaseFactor = 0.5f;
+				returnToCam = true;
 				break;
 			//shotgun
 			case 2:
-				shakeAmount =1f;
-				shakeDuration =0.1f;
-				decreaseFactor = 0.05f;
+				if (setAll) { shakeAmount = 0.1f; }
+				shakeDuration = 0.2f;
+				decreaseFactor = 0.1f;
 				returnToCam = true;
 				break;
 		}
 	}
 
+	void OnEnable()
+	{
+		originalPos = camTransform.localPosition;
+		 SetVars(true);
+
+	}
+	void StartRecoil() {
+		isShooting = true;
+	}
+	void StopRecoil() {
+		isShooting = false;
+	}
+
 	void Update()
 	{
-		
-		if (shakeDuration > 0f)
-		{
-			camTransform.localPosition = originalPos + UnityEngine.Random.insideUnitSphere * shakeAmount;
-			shakeDuration -= Time.deltaTime;
-		}
-		else
-		{
-			shakeDuration = 0f;
-			if(returnToCam = true){
-				camTransform.localPosition = originalPos;
+		if (isShooting) { 
+			if (shakeDuration > 0f)
+			{
+				camTransform.localPosition = originalPos + UnityEngine.Random.insideUnitSphere * shakeAmount;
+				addRecoil();
+				SetVars(false);
+				shakeDuration -= Time.deltaTime* decreaseFactor;
+				
+			}
+			else
+			{
+				addRecoil();
+				SetVars(true);
+				isShooting = false;
+				if (returnToCam ==	 true) {
+					camTransform.localPosition = originalPos;
+				}
 			}
 		}
 		
 	}
 }
+

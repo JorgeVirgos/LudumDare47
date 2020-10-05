@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5721725054662130251}
   - component: {fileID: 5721725054662130248}
   - component: {fileID: 5721725054662130249}
+  - component: {fileID: 8768467201288953372}
   m_Layer: 0
   m_Name: SAGSpawner
   m_TagString: Untagged
@@ -109,3 +110,22 @@ MonoBehaviour:
   proyectile: {fileID: 5984415776302096345, guid: eb566b32c07090249994834bdd47a6f1,
     type: 3}
   num: 4
+  ImpulseDirection: {x: 0, y: 0, z: 0}
+  Impulse: 20
+  Damage: 0
+--- !u!54 &8768467201288953372
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5721725054662130246}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

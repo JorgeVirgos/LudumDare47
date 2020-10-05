@@ -23,6 +23,8 @@ public class Weapon : InventoryItem {
   public Vector3 ReloadRotation;
   public float ReloadTime;
   public AnimationCurve ReloadCurve;
+  public float MinShootPitch;
+  public float MaxShootPitch;
 
   internal WeaponType weaponType;
 
@@ -88,8 +90,11 @@ public class Weapon : InventoryItem {
       return false;
     }
     CurrentClipAmmo -= 1;
-    if(ShootSound)
+    if (ShootSound) {
+      float rand = Random.Range(MinShootPitch, MaxShootPitch);
+      AudioComp.pitch = rand;
       AudioComp.PlayOneShot(ShootSound);
+    }
     return true;
   }
 

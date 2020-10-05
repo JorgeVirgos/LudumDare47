@@ -122,6 +122,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  MinShootPitch: 1
+  MaxShootPitch: 1.5
 --- !u!1001 &7442350822275487685
 PrefabInstance:
   m_ObjectHideFlags: 0

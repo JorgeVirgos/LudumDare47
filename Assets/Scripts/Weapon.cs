@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapon : InventoryItem {
 
@@ -25,6 +26,8 @@ public class Weapon : InventoryItem {
   public AnimationCurve ReloadCurve;
   public float MinShootPitch;
   public float MaxShootPitch;
+  public Text ClipAmmoText;
+  public Text MaxAmmoText;
 
   internal WeaponType weaponType;
 
@@ -37,6 +40,7 @@ public class Weapon : InventoryItem {
   private bool bIsReloading;
   private Vector3 LocalPosition;
   private float CurrentReloadTime;
+  private bool bIsCurrentWeapon;
 
   void Awake() {
     CurrentShotCooldown = ShotCooldown;
@@ -49,11 +53,12 @@ public class Weapon : InventoryItem {
       AudioComp = gameObject.AddComponent<AudioSource>();
     AudioComp.clip = EmptyClipSound;
     AudioComp.playOnAwake = false;
+    UpdateAmmoUI();
+    bIsCurrentWeapon = false;
   }
 
   // Update is called once per frame
   protected void Update() {
-
     if(bIsReloading) {
       float CurveValue = ReloadCurve.Evaluate(CurrentReloadTime);
       transform.localPosition = LocalPosition + (ReloadOffset * CurveValue);
@@ -63,24 +68,20 @@ public class Weapon : InventoryItem {
         CurrentReloadTime = 0.0f;
         bIsReloading = false;
         if(CurrentAmmo >= MaxClipAmmo) {
+          CurrentAmmo -= MaxClipAmmo - CurrentClipAmmo;
           CurrentClipAmmo = MaxClipAmmo;
-          CurrentAmmo -= MaxClipAmmo;
         } else {
-          CurrentClipAmmo = CurrentAmmo;
-          CurrentAmmo = 0;
+          CurrentClipAmmo += CurrentAmmo;
+          if(CurrentClipAmmo > MaxClipAmmo) {
+            CurrentAmmo = CurrentClipAmmo - MaxClipAmmo;
+            CurrentClipAmmo = MaxClipAmmo;
+          } else {
+            CurrentAmmo = 0;
+          }
         }
+        UpdateAmmoUI();
       }
     }
-
-
-    /*if(bIsReloading) {
-      Vector3 position = Vector3.Lerp(LocalPosition, LocalPosition + ReloadOffset, ReloadTime * 0.5f);
-      if(position == (LocalPosition + ReloadOffset)) {
-        bIsReloading = false;
-      }
-    } else {
-      Vector3 position = Vector3.Lerp(LocalPosition + ReloadOffset, LocalPosition, ReloadTime * 0.5f);
-    }*/
   }
 
   public virtual bool Shoot() {
@@ -90,6 +91,7 @@ public class Weapon : InventoryItem {
       return false;
     }
     CurrentClipAmmo -= 1;
+    UpdateAmmoUI();
     if (ShootSound) {
       float rand = Random.Range(MinShootPitch, MaxShootPitch);
       AudioComp.pitch = rand;
@@ -109,13 +111,6 @@ public class Weapon : InventoryItem {
     if(ReloadSound)
       AudioComp.PlayOneShot(ReloadSound);
     bIsReloading = true;
-    /*if(CurrentAmmo >= MaxClipAmmo) {
-      CurrentClipAmmo = MaxClipAmmo;
-      CurrentAmmo -= MaxClipAmmo;
-    } else {
-      CurrentClipAmmo = CurrentAmmo;
-      CurrentAmmo = 0;
-    }*/
   }
 
   public void RecoverAmmo(int ammo) {
@@ -123,5 +118,17 @@ public class Weapon : InventoryItem {
     if(CurrentAmmo > MaxAmmo) {
       CurrentAmmo = MaxAmmo;
     }
+    UpdateAmmoUI();
+  }
+
+  public void UpdateAmmoUI() {
+    if(bIsCurrentWeapon) {
+      ClipAmmoText.text = CurrentClipAmmo.ToString();
+      MaxAmmoText.text = CurrentAmmo.ToString();
+    }
+  }
+
+  public void SetCurrentWeapon(bool current) {
+    bIsCurrentWeapon = current;
   }
 }

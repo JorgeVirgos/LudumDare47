@@ -22,8 +22,11 @@ public class Weapon : InventoryItem {
   public AudioClip EmptyClipSound;
   public Vector3 ReloadOffset;
   public Vector3 ReloadRotation;
+  public Vector3 ShootingOffset;
+  public Vector3 ShootingRotation;
   public float ReloadTime;
   public AnimationCurve ReloadCurve;
+  public AnimationCurve ShootingCurve;
   public float MinShootPitch;
   public float MaxShootPitch;
   public Text ClipAmmoText;
@@ -35,12 +38,14 @@ public class Weapon : InventoryItem {
   protected int CurrentClipAmmo;
   protected float CurrentShotCooldown = 0.0f;
   protected float AmmunitionQuantity;
+  protected float CurrentShootingTime;
 
   private AudioSource AudioComp;
   private bool bIsReloading;
   private Vector3 LocalPosition;
   private float CurrentReloadTime;
   private bool bIsCurrentWeapon;
+  private bool bIsInAnimation;
 
   void Awake() {
     CurrentShotCooldown = ShotCooldown;
@@ -59,8 +64,19 @@ public class Weapon : InventoryItem {
 
   // Update is called once per frame
   protected void Update() {
+    float CurveValue = 0.0f;
+    if(bIsInAnimation) {
+      CurveValue = ShootingCurve.Evaluate(CurrentShootingTime);
+      transform.localPosition = LocalPosition + (ShootingOffset * CurveValue);
+      transform.localEulerAngles = ShootingRotation * CurveValue;
+      CurrentShootingTime += Time.deltaTime;
+    }
+    if(CurrentShootingTime > ShotCooldown) {
+      CurrentShootingTime = 0.0f;
+      bIsInAnimation = false;
+    }
     if(bIsReloading) {
-      float CurveValue = ReloadCurve.Evaluate(CurrentReloadTime);
+      CurveValue = ReloadCurve.Evaluate(CurrentReloadTime);
       transform.localPosition = LocalPosition + (ReloadOffset * CurveValue);
       transform.localEulerAngles = ReloadRotation * CurveValue;
       CurrentReloadTime += Time.deltaTime;
@@ -91,6 +107,7 @@ public class Weapon : InventoryItem {
       return false;
     }
     CurrentClipAmmo -= 1;
+    bIsInAnimation = true;
     UpdateAmmoUI();
     if (ShootSound) {
       float rand = Random.Range(MinShootPitch, MaxShootPitch);
@@ -131,4 +148,5 @@ public class Weapon : InventoryItem {
   public void SetCurrentWeapon(bool current) {
     bIsCurrentWeapon = current;
   }
+
 }

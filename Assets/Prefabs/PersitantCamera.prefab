@@ -190,7 +190,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8440066718287436292}
   - component: {fileID: 8440066718287436290}
-  - component: {fileID: 8440066718287436291}
   - component: {fileID: 1762286774}
   m_Layer: 0
   m_Name: PersitantCamera
@@ -258,14 +257,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &8440066718287436291
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8440066718287436293}
-  m_Enabled: 1
 --- !u!114 &1762286774
 MonoBehaviour:
   m_ObjectHideFlags: 0

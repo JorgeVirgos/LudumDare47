@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
   public KeyCode ReloadKey = KeyCode.R;
   [Range(0.01f, 1.0f)]
   public float jumpFix = 0.05f;
+  public Vector3 ExternalInput;
 
   public InventorySystem Inventory;
   private Weapon CurrentWeapon;
@@ -78,12 +79,11 @@ public class PlayerController : MonoBehaviour
     horizontalInput = Input.GetAxis("Mouse X") * CameraSpeedX * Time.deltaTime;
     verticalInput += Input.GetAxis("Mouse Y") * CameraSpeedY * Time.deltaTime;
 
-    verticalInput = Mathf.Clamp(verticalInput, MinCameraAngleY, MaxCameraAngleY);
-
-    FPSCamera.transform.eulerAngles =
-      new Vector3(-verticalInput, FPSCamera.transform.eulerAngles.y, 0.0f);
-
     transform.Rotate(0.0f, horizontalInput, 0.0f);
+
+    verticalInput = Mathf.Clamp(verticalInput, MinCameraAngleY, MaxCameraAngleY);
+    FPSCamera.transform.localEulerAngles =
+      new Vector3(-verticalInput, FPSCamera.transform.localEulerAngles.y, 0.0f);
 
     Vector3 a = Input.GetAxis("Horizontal") * transform.right;
     Vector3 b  = Input.GetAxis("Vertical") * transform.forward;

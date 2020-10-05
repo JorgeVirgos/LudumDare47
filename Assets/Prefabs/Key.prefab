@@ -52,6 +52,7 @@ MonoBehaviour:
   RotateSpeed: 50
   HealAmount: 30
   ArmorAmount: 30
+  PickUpSound: {fileID: 8300000, guid: cd98dc463d927f849853a0c9fe088c88, type: 3}
 --- !u!33 &7664669264375068272
 MeshFilter:
   m_ObjectHideFlags: 0

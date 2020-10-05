@@ -48,6 +48,10 @@ public class PlayerController : MonoBehaviour
       CurrentWeapon = (Weapon)Item;
       CurrentWeapon.SetCurrentWeapon(true);
     }
+    List<InventoryItem> Items = Inventory.GetInventoryItemsByType(InventoryItem.ItemType.kItemTypePowerUp);
+    if(Items.Count > 0) {
+      jumpFix += ((PickableObject)Item).JumpForceAmount;
+    }
     /*if(!Inventory) {
       Instantiate();
     }*/

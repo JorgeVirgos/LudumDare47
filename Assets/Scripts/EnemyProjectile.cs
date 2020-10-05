@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicProjectile : MonoBehaviour {
-
+public class EnemyProjectile : MonoBehaviour {
   public Vector3 ImpulseDirection;
   public float Impulse;
   public float aliveTime;
@@ -39,14 +38,15 @@ public class BasicProjectile : MonoBehaviour {
 
   void OnCollisionEnter(Collision collision) {
     if(collision.gameObject.tag == "Projectile") return;
-    if(collision.gameObject.tag == "Enemy") {
+    if(collision.gameObject.tag == "Player") {
       HealthComponent character = collision.gameObject.GetComponent<HealthComponent>();
       if(character) {
         character.TakeDamage(Damage);
       }
     }
     int rand = Random.Range(0, bulletClips.Length - 1);
-    SoundSource.PlayOneShot(bulletClips[rand], 0.2f);
+    if(SoundSource) {}
+      SoundSource.PlayOneShot(bulletClips[rand], 0.2f);
     gameObject.GetComponent<BoxCollider>().enabled = false;
     gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
   }

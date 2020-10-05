@@ -31,6 +31,7 @@ public class MachineGun : Weapon {
         BasicProjectile prj = obj.GetComponent<BasicProjectile>();
         if (prj)  {
           prj.Damage = WeaponDamage;
+          prj.Direction = transform.forward;
           prj.ImpulseDirection = transform.parent.transform.forward;
         }
         CurrentShotCooldown = ShotCooldown;

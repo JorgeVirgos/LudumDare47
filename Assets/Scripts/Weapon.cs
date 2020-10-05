@@ -20,6 +20,7 @@ public class Weapon : InventoryItem {
   public AudioClip ReloadSound;
   public AudioClip EmptyClipSound;
   public Vector3 ReloadOffset;
+  public Vector3 ReloadRotation;
   public float ReloadTime;
   public AnimationCurve ReloadCurve;
 
@@ -45,6 +46,7 @@ public class Weapon : InventoryItem {
     if(!AudioComp)
       AudioComp = gameObject.AddComponent<AudioSource>();
     AudioComp.clip = EmptyClipSound;
+    AudioComp.playOnAwake = false;
   }
 
   // Update is called once per frame
@@ -53,6 +55,7 @@ public class Weapon : InventoryItem {
     if(bIsReloading) {
       float CurveValue = ReloadCurve.Evaluate(CurrentReloadTime);
       transform.localPosition = LocalPosition + (ReloadOffset * CurveValue);
+      transform.localEulerAngles = ReloadRotation * CurveValue;
       CurrentReloadTime += Time.deltaTime;
       if(CurrentReloadTime >= ReloadTime) {
         CurrentReloadTime = 0.0f;

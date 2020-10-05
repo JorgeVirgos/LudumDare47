@@ -28,7 +28,7 @@ public class Shotgun : Weapon {
   }
 
   public override bool Shoot() {
-    if(CurrentShotCooldown <= 0.0f) {
+    if(CurrentShotCooldown <= 0.0f && !bIsShooting) {
       if(!base.Shoot()) return false;
       for(int i = 0; i < NumberOfPellets; ++i) {
         float yRotation = 25 * i - 50;

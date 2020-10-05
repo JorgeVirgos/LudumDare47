@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d91886b45476c645bef7290f9e10067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FirstLevel: AitorTest
+  FirstLevel: FirstLoop
 --- !u!1001 &1893560328
 PrefabInstance:
   m_ObjectHideFlags: 0

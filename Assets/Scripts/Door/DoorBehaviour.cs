@@ -101,17 +101,17 @@ public class DoorBehaviour : MonoBehaviour, IInteractable
 
   public void OpenDoor()
   {
-    Debug.Log("OpenDoorStart");
+    //Debug.Log("OpenDoorStart");
     if (transitioning) return;
-    Debug.Log("OpenDoorEnd");
+    //Debug.Log("OpenDoorEnd");
     StartCoroutine(TranslateDoorCor(startPos, target.position, openSpeed, OpenDoorCor()));
   }
 
   private void CloseDoor(bool destroy)
   {
-    Debug.Log("CloseDoorStart");
+    //Debug.Log("CloseDoorStart");
     if (transitioning) return;
-    Debug.Log("CloseDoorEnd");
+    //Debug.Log("CloseDoorEnd");
     StartCoroutine(TranslateDoorCor(target.position, startPos, openSpeed, CloseDoorCor(destroy)));
   }
   

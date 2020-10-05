@@ -629,7 +629,7 @@ Transform:
   - {fileID: 8287288869383130409}
   - {fileID: 4068307150295215142}
   m_Father: {fileID: 6204476266736765136}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2147390989814513217
 MeshFilter:
@@ -815,7 +815,7 @@ Transform:
   m_Children:
   - {fileID: 9193046405217263777}
   m_Father: {fileID: 6204476266736765136}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2831419427798078691
 MeshFilter:
@@ -1433,7 +1433,7 @@ Transform:
   m_Children:
   - {fileID: 6458001684754482569}
   m_Father: {fileID: 6204476266736765136}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6982594465291503844
 GameObject:
@@ -2267,7 +2267,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6204476266736765136}
   m_Layer: 0
-  m_Name: spawnerRoomKey1 (1)
+  m_Name: spawnerRoomKey1
   m_TagString: sapwnerRoom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2284,9 +2284,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2423289359803250041}
   - {fileID: 7470586225907060390}
   - {fileID: 3176782980356592676}
+  - {fileID: 2423289359803250041}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2464,7 +2464,7 @@ PrefabInstance:
     - target: {fileID: 7664669264375068275, guid: 1e04ef646f3447946bd0f7c11770aa4e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 3.96
       objectReference: {fileID: 0}
     - target: {fileID: 7664669264375068275, guid: 1e04ef646f3447946bd0f7c11770aa4e,
         type: 3}

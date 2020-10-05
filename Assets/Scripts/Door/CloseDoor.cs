@@ -15,8 +15,8 @@ public class CloseDoor : MonoBehaviour
   {
     if (other.gameObject.CompareTag("Player"))
     {
-      db.shouldDestroy = true;
-      Destroy(this);
+      //db.shouldDestroy = true;
+      //Destroy(this);
     }
   }
 }

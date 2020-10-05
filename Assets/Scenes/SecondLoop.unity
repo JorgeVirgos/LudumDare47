@@ -295,6 +295,42 @@ PrefabInstance:
       objectReference: {fileID: 8400000, guid: 6b450b634db2b374fa078269b63eb939, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82ee3fe49c78a0a47a26acd382d80e32, type: 3}
+--- !u!114 &1172933444 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5467755860281394992, guid: 82ee3fe49c78a0a47a26acd382d80e32,
+    type: 3}
+  m_PrefabInstance: {fileID: 1172933443}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65d48f5bfcca36b4e802ae14701835cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1172933445 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1977917135235143703, guid: 82ee3fe49c78a0a47a26acd382d80e32,
+    type: 3}
+  m_PrefabInstance: {fileID: 1172933443}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e697e6c9db4964baffc851074feefe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1172933446 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 118943567608268326, guid: 82ee3fe49c78a0a47a26acd382d80e32,
+    type: 3}
+  m_PrefabInstance: {fileID: 1172933443}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3404efc28071834e86b635e99133597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1172933448 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2728002580156730929, guid: 82ee3fe49c78a0a47a26acd382d80e32,
@@ -358,12 +394,12 @@ MonoBehaviour:
     pickedColor: {r: 1, g: 1, b: 1, a: 1}
     highlightColor: {r: 0.23113209, g: 0.45598966, b: 1, a: 1}
   defaultWeapons:
-  - weaponItem: {fileID: 0}
+  - weaponItem: {fileID: 1172933446}
     isDefault: 1
     weaponSprite: {fileID: 21300000, guid: 17ff04b59e557dc428b7eeace0772abf, type: 3}
-  - weaponItem: {fileID: 0}
+  - weaponItem: {fileID: 1172933445}
     isDefault: 0
     weaponSprite: {fileID: 21300000, guid: 78732e1d832905f499e8770736776e1a, type: 3}
-  - weaponItem: {fileID: 0}
+  - weaponItem: {fileID: 1172933444}
     isDefault: 0
     weaponSprite: {fileID: 21300000, guid: 2fec47c59a808c84a851e46a75d798f0, type: 3}

@@ -83,6 +83,7 @@ public class LevelManager : MonoBehaviour
     public GameObject player_ = null;
     GameObject current_level = null;
     int current_corridor = -1;
+    GameObject[] corridor_by_dir;
     List<GameObject> next_levels;
     List<GameObject> corridors;
 
@@ -96,6 +97,7 @@ public class LevelManager : MonoBehaviour
     bool entered_room = false;
     bool finished_room = true;
     bool should_open_doors = false;
+    bool load_next_level = true;
 
     public GameObject PistolEnemy, RifleEnemy, ShotgunEnemy;
     public int num = 3;
@@ -131,7 +133,7 @@ public class LevelManager : MonoBehaviour
         GameObject new_level = Instantiate(level_prefab, transform);
 
         if(current_level != null)
-            new_level.transform.localPosition = current_level.transform.localPosition + relative_pos * 2.0f;
+            new_level.transform.position = current_level.transform.position + relative_pos * 2.0f;
 
         new_level.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
         new_level.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
@@ -242,9 +244,12 @@ public class LevelManager : MonoBehaviour
 
     void LoadNextLevel()
     {
+        load_next_level = false;
 
         List<int> next_ids = new List<int>();
         List<Vector3> relative_positions = new List<Vector3>();
+
+        for (int i = 0; i < 4; ++i) corridor_by_dir[i] = null;
 
         GameObject corridor = null;
         if(current_room_.room_id_north_ != 0 && current_room_.room_id_north_ != previous_room_.id()) {
@@ -252,8 +257,12 @@ public class LevelManager : MonoBehaviour
             relative_positions.Add(new Vector3(0.0f, 0.0f, room_size));
 
             corridor = GetUnusedCorridor();
-            corridor.transform.position = current_level.transform.position + new Vector3(0.0f, 0.0f, 1.0f) * room_size;
-            corridor.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+            if (corridor != null)
+            {
+                corridor.transform.position = current_level.transform.position + new Vector3(0.0f, 0.0f, 1.0f) * room_size;
+                corridor.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                corridor_by_dir[0] = corridor;
+            }
         }
         if (current_room_.room_id_south_ != 0 && current_room_.room_id_south_ != previous_room_.id())
         {
@@ -261,8 +270,12 @@ public class LevelManager : MonoBehaviour
             relative_positions.Add(new Vector3(0.0f, 0.0f, -room_size));
 
             corridor = GetUnusedCorridor();
-            corridor.transform.position = current_level.transform.position + new Vector3(0.0f, 0.0f, -1.0f) * room_size;
-            corridor.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+            if (corridor != null)
+            {
+                corridor.transform.position = current_level.transform.position + new Vector3(0.0f, 0.0f, -1.0f) * room_size;
+                corridor.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+                corridor_by_dir[1] = corridor;
+            }
         }
         if (current_room_.room_id_east_ != 0 && current_room_.room_id_east_ != previous_room_.id())
         {
@@ -270,8 +283,12 @@ public class LevelManager : MonoBehaviour
             relative_positions.Add(new Vector3(room_size, 0.0f, 0.0f));
 
             corridor = GetUnusedCorridor();
-            corridor.transform.position = current_level.transform.position + new Vector3(1.0f, 0.0f, 0.0f) * room_size;
-            corridor.transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
+            if (corridor != null)
+            {
+                corridor.transform.position = current_level.transform.position + new Vector3(1.0f, 0.0f, 0.0f) * room_size;
+                corridor.transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
+                corridor_by_dir[2] = corridor;
+            }
         }
         if (current_room_.room_id_west_ != 0 && current_room_.room_id_west_ != previous_room_.id())
         {
@@ -279,8 +296,12 @@ public class LevelManager : MonoBehaviour
             relative_positions.Add(new Vector3(-room_size, 0.0f, 0.0f));
 
             corridor = GetUnusedCorridor();
-            corridor.transform.position = current_level.transform.position + new Vector3(-1.0f, 0.0f, 0.0f) * room_size;
-            corridor.transform.rotation = Quaternion.Euler(0.0f, -90.0f, 0.0f);
+            if (corridor != null)
+            {
+                corridor.transform.position = current_level.transform.position + new Vector3(-1.0f, 0.0f, 0.0f) * room_size;
+                corridor.transform.rotation = Quaternion.Euler(0.0f, -90.0f, 0.0f);
+                corridor_by_dir[3] = corridor;
+            }
         }
 
 
@@ -311,7 +332,7 @@ public class LevelManager : MonoBehaviour
 
     void DestroyUnusedLevels()
     {
-
+        spawnpoints.Clear();
         foreach (GameObject enemy in enemies) Destroy(enemy);
         enemies.Clear();
 
@@ -366,6 +387,8 @@ public class LevelManager : MonoBehaviour
 
         current_corridor = target_pos;
         for (int i = 0; i < 4; ++i) if(i != current_corridor) corridors[i].SetActive(false);
+
+        load_next_level = true;
     }
 
     void ActiveDoors(RoomNode room, GameObject level)
@@ -392,7 +415,17 @@ public class LevelManager : MonoBehaviour
             if(room.direction_locked != null && room.direction_locked.TryGetValue((CardinalDirection)i, out key_value)){
                 door.transform.GetChild(0).gameObject.GetComponent<DoorBehaviour>().RequiredKey = 
                     (PickableObject.KeyNumber)key_value;
+                //if(corridor_by_dir[i] != null)
+                //    corridor_by_dir[i].transform.GetChild(0).Find("SDoor").GetChild(0).gameObject.GetComponent<DoorBehaviour>().RequiredKey =
+                //        (PickableObject.KeyNumber)key_value;
             }
+            //else
+            //{
+            //    if (corridor_by_dir[i] != null)
+            //        corridor_by_dir[i].transform.GetChild(0).GetChild(0).GetChild(0).gameObject.GetComponent<DoorBehaviour>().RequiredKey =
+            //            PickableObject.KeyNumber.kKeyNumberNone;
+            //}
+
 
             if (door.transform.childCount > 0)
             {
@@ -407,6 +440,7 @@ public class LevelManager : MonoBehaviour
 
         next_rooms_ = new List<RoomNode>();
         next_levels = new List<GameObject>();
+        corridor_by_dir = new GameObject[4];
 
         current_room_ = rooms_[0];
         previous_room_ = current_room_;
@@ -434,55 +468,102 @@ public class LevelManager : MonoBehaviour
         return "Room" + Random.Range(1, 11).ToString();
     }
 
+    int CreatePassageway(ref List<RoomNode> rooms_list, ref int id_counter, int first, CardinalDirection dir, int count)
+    {
+        List<RoomNode> passage = new List<RoomNode>();
+        //Route 1
+        for (int i = 0; i < count; ++i)
+        {
+            RoomNode room = new RoomNode(id_counter++);
+            room.room_prefab_ = (GameObject)FindRoomType(RandomRoom());
+
+            if (i > 0)
+            {
+                RoomNode prev_room = passage[i - 1];
+                switch (dir)
+                {
+                    case CardinalDirection.North: prev_room.ConN(ref room); break;
+                    case CardinalDirection.South: prev_room.ConS(ref room); break;
+                    case CardinalDirection.East: prev_room.ConE(ref room); break;
+                    case CardinalDirection.West: prev_room.ConW(ref room); break;
+                }
+
+                passage[i - 1] = prev_room;
+            }
+            else
+            {
+                RoomNode prev_room = rooms_list[first];
+                switch (dir)
+                {
+                    case CardinalDirection.North: prev_room.ConN(ref room); break;
+                    case CardinalDirection.South: prev_room.ConS(ref room); break;
+                    case CardinalDirection.East: prev_room.ConE(ref room); break;
+                    case CardinalDirection.West: prev_room.ConW(ref room); break;
+                }
+                rooms_list[first] = prev_room;
+            }
+            passage.Add(room);
+        }
+
+        int first_room = rooms_list.Count;
+        foreach (RoomNode room in passage) rooms_list.Add(room);
+
+        return first_room;
+    }
+
     void LoadRooms()
     {
+        rooms_ = new List<RoomNode>();
         room_prefabs_ = Resources.LoadAll("Prefabs/Rooms", typeof(GameObject));
 
         int id_counter = 1000;
+        RoomNode starting_room  = new RoomNode(id_counter++);
         RoomNode first_room  = new RoomNode(id_counter++);
-        RoomNode second_room = new RoomNode(id_counter++);
-        RoomNode third_room  = new RoomNode(id_counter++);
-        RoomNode fourth_room = new RoomNode(id_counter++);
-        RoomNode fifth_room = new RoomNode(id_counter++);
+        RoomNode computer_room = new RoomNode(id_counter++);
+        computer_room.room_prefab_ = (GameObject)FindRoomType("ComputerRoom");
 
-        first_room.room_prefab_ = (GameObject) FindRoomType("emptyRoom");
-        second_room.room_prefab_ = (GameObject)FindRoomType(RandomRoom());
-        third_room.room_prefab_ = (GameObject) FindRoomType(RandomRoom());
-        fourth_room.room_prefab_ = (GameObject)FindRoomType(RandomRoom());
-        fifth_room.room_prefab_ = (GameObject)FindRoomType("emptyRoom");
+        starting_room.room_prefab_ = (GameObject) FindRoomType("emptyRoom");
+        first_room.room_prefab_ = starting_room.room_prefab_;
 
-        first_room.ConN(ref second_room);
-        first_room.ConS(ref third_room);
-        first_room.ConE(ref fourth_room);
-        first_room.ConW(ref fifth_room);
 
-        //Locked Doors
-        fourth_room.AddLockedDoor(CardinalDirection.West, 1);
-
-        rooms_ = new List<RoomNode>();
+        first_room.ConS(ref starting_room);
+        rooms_.Add(starting_room);
         rooms_.Add(first_room);
-        rooms_.Add(third_room);
-        rooms_.Add(fourth_room);
-        rooms_.Add(fifth_room);
-        rooms_.Add(second_room);
 
-        RoomNode previous_room = rooms_[rooms_.Count - 1];
+        int locked_count = CreatePassageway(ref rooms_, ref id_counter, 1, CardinalDirection.East, 3);
+        RoomNode locked_room = rooms_[locked_count];
+        locked_room.AddLockedDoor(CardinalDirection.West, 2);
+        rooms_[locked_count] = locked_room;
 
-        //First Passageway
-        for (int i = 0; i < 2; ++i)
-        {
-            RoomNode new_room = new RoomNode(id_counter++);
+        CreatePassageway(ref rooms_, ref id_counter, 1, CardinalDirection.North, 3);
+        RoomNode last = rooms_[rooms_.Count - 1];
+        last.room_prefab_ = (GameObject)FindRoomType("spawnerRoomKey1");
+        computer_room.ConS(ref last);
+        rooms_[rooms_.Count - 1] = last;
 
-            if(i == 1) new_room.room_prefab_ = (GameObject)FindRoomType("ComputerRoom");
-            else new_room.room_prefab_ = (GameObject)FindRoomType(RandomRoom());
+        int route_to_key_1 = CreatePassageway(ref rooms_, ref id_counter, 1, CardinalDirection.West, 1);
 
-            new_room.ConS(ref previous_room);
+        RoomNode weapon_room = rooms_[route_to_key_1];
+        weapon_room.AddLockedDoor(CardinalDirection.East, 1);
+        weapon_room.room_prefab_ = (GameObject)FindRoomType("emptyRoom");
+        CreatePassageway(ref rooms_, ref id_counter, route_to_key_1, CardinalDirection.North, 5);
 
-            rooms_[rooms_.Count - 1] = previous_room;
+        RoomNode armor_room = rooms_[rooms_.Count - 2]; armor_room.room_prefab_ = (GameObject)FindRoomType("spawnerRoomArmor");
+        rooms_[rooms_.Count - 2] = armor_room;
 
-            rooms_.Add(new_room);
-            previous_room = new_room;
-        }
+        RoomNode key_room = rooms_[rooms_.Count - 1]; armor_room.room_prefab_ = (GameObject)FindRoomType("spawnerRoomKey2");
+        computer_room.ConE(ref key_room);
+        rooms_[rooms_.Count - 1] = armor_room;
+
+
+        rooms_.Add(computer_room);
+
+
+
+
+
+
+
     }
 
     RoomNode FindRoom(int id)
@@ -521,7 +602,7 @@ public class LevelManager : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (next_levels.Count == 0) {
+        if (load_next_level) {
             LoadNextLevel();
         }
 

@@ -44,6 +44,7 @@ public class BasicProjectile : MonoBehaviour {
     int rand = Random.Range(0, bulletClips.Length - 1);
     SoundSource.PlayOneShot(bulletClips[rand], 0.2f);
     gameObject.GetComponent<BoxCollider>().enabled = false;
-    gameObject.GetComponent<MeshRenderer>().enabled = false;
+    //gameObject.GetComponent<MeshRenderer>().enabled = false;
+    gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
   }
 }

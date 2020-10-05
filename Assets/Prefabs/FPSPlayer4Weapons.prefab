@@ -101,6 +101,8 @@ MonoBehaviour:
   bIsShooting: 0
   MaxAmmo: 30
   MaxClipAmmo: 2
+  ShootSound: {fileID: 0}
+  ReloadSound: {fileID: 0}
   NumberOfPellets: 10
   DispersionAngle: 0.5
   DispersionDistance: 2
@@ -296,6 +298,8 @@ MonoBehaviour:
   bIsShooting: 0
   MaxAmmo: 150
   MaxClipAmmo: 15
+  ShootSound: {fileID: 0}
+  ReloadSound: {fileID: 0}
 --- !u!1 &4373658333375107553
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,6 +438,7 @@ MonoBehaviour:
   FPSCamera: {fileID: 4373658333375107555}
   ReloadKey: 114
   jumpFix: 0.125
+  Inventory: {fileID: 0}
 --- !u!136 &4373658333431360521
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -477,8 +482,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 4809591569421936457}
-  weaponCanvasPrefab: {fileID: 7404203263658626185, guid: e6cd89c6a185d5b4b96581c9c00b43c8,
-    type: 3}
+  weaponItemTypeCanvas:
+    canvasPrefab: {fileID: 0}
+    notPickedColor: {r: 0, g: 0, b: 0, a: 0}
+    pickedColor: {r: 0, g: 0, b: 0, a: 0}
+    highlightColor: {r: 0, g: 0, b: 0, a: 0}
   defaultWeapons:
   - weaponItem: {fileID: 4373658331890447013}
     isDefault: 1
@@ -489,7 +497,8 @@ MonoBehaviour:
   - weaponItem: {fileID: 3947745974202828161}
     isDefault: 1
     weaponSprite: {fileID: 0}
-  - weaponItem: {fileID: 0}
+  - weaponItem: {fileID: 815897630933930502, guid: 0905f80c8baed04418f2063d50a5943d,
+      type: 3}
     isDefault: 1
     weaponSprite: {fileID: 0}
 --- !u!114 &1831158483227709570
@@ -839,6 +848,8 @@ MonoBehaviour:
   bIsShooting: 0
   MaxAmmo: 150
   MaxClipAmmo: 30
+  ShootSound: {fileID: 0}
+  ReloadSound: {fileID: 0}
 --- !u!1001 &778447689151198914
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -109,13 +109,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 0
-  Projectile: {fileID: 5721725054662130246, guid: 4b5e4c743ee591b4586c367bdfdcbff5,
+  Projectile: {fileID: 5721725054662130246, guid: 066aecd4397cd7249a897ef8d784ad11,
     type: 3}
   ShotCooldown: 10
   WeaponDamage: 1
   bIsShooting: 0
   MaxAmmo: 20
   MaxClipAmmo: 20
+  ShootSound: {fileID: 8300000, guid: cd9fa9c9ad268f449adafe1407c85844, type: 3}
+  ReloadSound: {fileID: 0}
   NumberOfPellets: 0
   DispersionAngle: 0
   DispersionDistance: 0

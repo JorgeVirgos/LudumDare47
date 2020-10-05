@@ -131,6 +131,12 @@ PrefabInstance:
       propertyPath: ReloadOffset.z
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 4218309380206921563, guid: e1b023f1ae42e8442bde2bf95d025569,
+        type: 3}
+      propertyPath: Projectile
+      value: 
+      objectReference: {fileID: 4723874751890791380, guid: cd8634596091ad24a950e72c8aa32c1a,
+        type: 3}
     - target: {fileID: 4306952948602448607, guid: e1b023f1ae42e8442bde2bf95d025569,
         type: 3}
       propertyPath: m_LocalPosition.x

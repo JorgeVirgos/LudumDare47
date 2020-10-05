@@ -37,8 +37,8 @@ public class PlayerController : MonoBehaviour
     horizontalInput = transform.eulerAngles.y;
     verticalInput = transform.eulerAngles.x;
 
-    Cursor.visible = false;
-    Cursor.lockState = CursorLockMode.Locked;
+    //Cursor.visible = false;
+    //Cursor.lockState = CursorLockMode.Locked;
 
     // Inventory = GetComponent<InventorySystem>();
 

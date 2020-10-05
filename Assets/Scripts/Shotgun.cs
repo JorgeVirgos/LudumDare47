@@ -38,12 +38,22 @@ public class Shotgun : Weapon {
           BasicProjectile prj = obj.GetComponent<BasicProjectile>();
           if(prj) {
             prj.Damage = WeaponDamage;
-            prj.Direction = transform.forward;
+            prj.Direction = transform.parent.forward;
             Vector3 rand = Random.onUnitSphere + 
               (transform.parent.transform.forward * DispersionDistance);
             rand.Normalize();
             prj.ImpulseDirection = rand + transform.parent.transform.forward;
+          } else {
+          EnemyProjectile eprj = obj.GetComponent<EnemyProjectile>();
+          if (eprj)  {
+            eprj.Damage = WeaponDamage;
+            eprj.Direction = transform.parent.forward;
+            Vector3 rand = Random.onUnitSphere + 
+              (transform.parent.transform.forward * DispersionDistance);
+            rand.Normalize();
+            eprj.ImpulseDirection = rand + transform.parent.transform.forward;
           }
+        }
         }
       }
       CurrentShotCooldown = ShotCooldown;

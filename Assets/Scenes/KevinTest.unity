@@ -277,11 +277,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1621076216058006565, guid: e44bb23ebd58e3148965b85c011bfaac,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8440066718287436292, guid: e44bb23ebd58e3148965b85c011bfaac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -341,16 +336,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PersitantCamera
-      objectReference: {fileID: 0}
-    - target: {fileID: 8440066720234020337, guid: e44bb23ebd58e3148965b85c011bfaac,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8440066720234020340, guid: e44bb23ebd58e3148965b85c011bfaac,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e44bb23ebd58e3148965b85c011bfaac, type: 3}

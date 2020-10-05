@@ -94,8 +94,8 @@ public class DoorBehaviour : MonoBehaviour, IInteractable
   IEnumerator CloseDoorCor(bool destroy)
   {
     isOpen = false;
-    if (destroy)
-      Destroy(this);
+    //if (destroy)
+    //  Destroy(this);
     yield break;
   }
 

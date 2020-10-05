@@ -87,8 +87,8 @@ public class SpawnEnemiesInRoom : MonoBehaviour
 
     void SpawnIntoRoom() {
         if (current_level.name != "emptyRoom") {
-            GetSpawnPointsAndBoxes(current_level.transform.FindChild("suelo").gameObject);
-            if (current_level.transform.FindChild("suelo").tag == "shortRangeRoom")
+            GetSpawnPointsAndBoxes(current_level.transform.Find("suelo").gameObject);
+            if (current_level.transform.Find("suelo").tag == "shortRangeRoom")
             {
                 Spawn(PistolEnemy, ShotgunEnemy);
             }

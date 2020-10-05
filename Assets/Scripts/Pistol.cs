@@ -34,6 +34,14 @@ public class Pistol : Weapon {
           prj.Damage = WeaponDamage;
           prj.Direction = transform.parent.forward;
           prj.ImpulseDirection = transform.parent.transform.forward;
+        } else {
+          EnemyProjectile eprj = obj.GetComponent<EnemyProjectile>();
+          if (eprj)  {
+            CurrentShootingTime = 0.0f;
+            eprj.Damage = WeaponDamage;
+            eprj.Direction = transform.parent.forward;
+            eprj.ImpulseDirection = transform.parent.transform.forward;
+          }
         }
         CurrentShotCooldown = ShotCooldown;
         bIsShooting = true;

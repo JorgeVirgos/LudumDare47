@@ -45,7 +45,7 @@ public class EnemyProjectile : MonoBehaviour {
       }
     }
     int rand = Random.Range(0, bulletClips.Length - 1);
-    if(SoundSource) {}
+    if(SoundSource && bulletClips.Length > 0)
       SoundSource.PlayOneShot(bulletClips[rand], 0.2f);
     gameObject.GetComponent<BoxCollider>().enabled = false;
     gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;

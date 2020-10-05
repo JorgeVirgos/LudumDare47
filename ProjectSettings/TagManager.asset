@@ -14,6 +14,7 @@ TagManager:
   - Enemy
   - spawner
   - DeterministicRoom
+  - sapwnerRoom
   layers:
   - Default
   - TransparentFX

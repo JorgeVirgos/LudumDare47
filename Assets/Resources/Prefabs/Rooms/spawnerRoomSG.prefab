@@ -111,7 +111,7 @@ Transform:
   - {fileID: 9003058292172614663}
   - {fileID: 5901804371493206495}
   m_Father: {fileID: 2551009677935300620}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1270474329698895387
 MeshFilter:
@@ -736,7 +736,7 @@ Transform:
   m_Children:
   - {fileID: 3434806299320649239}
   m_Father: {fileID: 2551009677935300620}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2715370997773411247
 GameObject:
@@ -979,7 +979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5816928219521490540
 Transform:
   m_ObjectHideFlags: 0
@@ -993,7 +993,7 @@ Transform:
   m_Children:
   - {fileID: 7549645914540483287}
   m_Father: {fileID: 2551009677935300620}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5018547208137455063
 MeshFilter:
@@ -1303,9 +1303,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8749830324891316675}
   - {fileID: 474748951134033119}
   - {fileID: 5816928219521490540}
+  - {fileID: 8749830324891316675}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2459,7 +2459,7 @@ PrefabInstance:
     - target: {fileID: 4703199298232353298, guid: 030cc3598fffbb24aa99fa321e455ceb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.1258016
+      value: -0.493
       objectReference: {fileID: 0}
     - target: {fileID: 4703199298232353298, guid: 030cc3598fffbb24aa99fa321e455ceb,
         type: 3}
@@ -2469,7 +2469,7 @@ PrefabInstance:
     - target: {fileID: 4703199298232353298, guid: 030cc3598fffbb24aa99fa321e455ceb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.7471882
+      value: 0.301
       objectReference: {fileID: 0}
     - target: {fileID: 4703199298232353298, guid: 030cc3598fffbb24aa99fa321e455ceb,
         type: 3}

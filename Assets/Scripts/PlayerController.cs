@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     if (Item)
     {
       CurrentWeapon = (Weapon)Item;
+      CurrentWeapon.SetCurrentWeapon(true);
     }
     /*if(!Inventory) {
       Instantiate();
@@ -61,9 +62,12 @@ public class PlayerController : MonoBehaviour
       if (Item.isPicked)
       {
         CurrentWeapon.gameObject.SetActive(false);
+        CurrentWeapon.SetCurrentWeapon(false);
         CurrentWeapon = (Weapon)Item;
         CurrentWeapon.gameObject.SetActive(true);
+        CurrentWeapon.SetCurrentWeapon(true);
         Inventory.SelectWeapon(weaponIndex);
+        CurrentWeapon.UpdateAmmoUI();
       }
     }
   }

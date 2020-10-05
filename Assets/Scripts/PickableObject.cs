@@ -16,6 +16,7 @@ public class PickableObject : InventoryItem {
   public float RotateSpeed = 50.0f;
   public float HealAmount = 30.0f;
   public float ArmorAmount = 30.0f;
+  public float JumpForceAmount = 0.2f;
   public AudioClip PickUpSound;
 
   private AudioSource SoundSource;
@@ -96,6 +97,7 @@ public class PickableObject : InventoryItem {
                   w.RecoverAmmo(w.MaxAmmo / 3);
                 }
               }
+              bShouldDestroy = true;
               gameObject.GetComponent<BoxCollider>().enabled = false;
               gameObject.transform.GetChild(0).gameObject.SetActive(false);
             }break;
@@ -103,6 +105,7 @@ public class PickableObject : InventoryItem {
             {
               HealthComponent health = collider.gameObject.GetComponent<HealthComponent>();
               if(health) health.Heal(HealAmount);
+              bShouldDestroy = true;
               gameObject.GetComponent<BoxCollider>().enabled = false;
               gameObject.transform.GetChild(0).gameObject.SetActive(false);
             }break;
@@ -110,12 +113,17 @@ public class PickableObject : InventoryItem {
             {
               HealthComponent health = collider.gameObject.GetComponent<HealthComponent>();
               if(health) health.RestoreArmor(ArmorAmount);
+              bShouldDestroy = true;
               gameObject.GetComponent<BoxCollider>().enabled = false;
               gameObject.transform.GetChild(0).gameObject.SetActive(false);
             }break;
           case InventoryItem.ItemType.kItemTypePowerUp:
             {
-              // Get Power Up
+              PlayerController PC = collider.gameObject.GetComponent<PlayerController>();
+              PC.jumpFix += JumpForceAmount;
+              bShouldDestroy = true;
+              gameObject.GetComponent<BoxCollider>().enabled = false;
+              gameObject.transform.GetChild(0).gameObject.SetActive(false);
             }break;
           case InventoryItem.ItemType.kItemTypeKey:
             {

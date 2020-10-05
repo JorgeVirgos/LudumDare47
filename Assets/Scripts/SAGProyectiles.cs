@@ -46,7 +46,7 @@ public class SAGProyectiles : MonoBehaviour
         {
             if (timer <= 0)
             {
-                Die();
+               Die();
                
             }
         }
@@ -76,8 +76,16 @@ public class SAGProyectiles : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision col) {
-        if (col.gameObject.tag == "Enemy") {
-            Destroy(col.gameObject);
+        if (col.gameObject.tag == "Untagged") return;
+        UnityEngine.Debug.Log(col.gameObject.tag);
+        if (col.gameObject.CompareTag("Enemy")) {
+            UnityEngine.Debug.Log("is");
+            HealthComponent enemy = col.gameObject.GetComponent<HealthComponent>();
+            if (enemy)
+            {
+                UnityEngine.Debug.Log("enemy");
+                enemy.TakeDamage(1000) ;
+            }
             Die();
         }
     }

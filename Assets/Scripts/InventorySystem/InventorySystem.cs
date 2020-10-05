@@ -50,15 +50,22 @@ public class InventorySystem : MonoBehaviour
 
     [SerializeField]
     public List<DefaultWeapon> defaultWeapons;
-    private Dictionary<InventoryItem.ItemType, List<InventoryItem>> items;
+
+    public struct Item
+    {
+        public InventoryItem item;
+        public bool isPicked;
+    }
+
+    private Dictionary<InventoryItem.ItemType, List<Item>> items;
 
     #region Inventory System Utility
     public bool HasThisKey(PickableObject.KeyNumber key)
     {
-        List<InventoryItem> keys = items[InventoryItem.ItemType.kItemTypeKey];
-        foreach (InventoryItem item in keys)
+        List<Item> keys = items[InventoryItem.ItemType.kItemTypeKey];
+        foreach (Item item in keys)
         {
-            PickableObject po = (PickableObject)item;
+            PickableObject po = (PickableObject)item.item;
             if (po != null && po.KeyTag == key)
             {
                 return true;
@@ -108,7 +115,10 @@ public class InventorySystem : MonoBehaviour
                 defaultWeapon.weaponItem.isPicked = defaultWeapon.isDefault;
                 defaultWeapon.weaponItem.itemType = InventoryItem.ItemType.kItemTypeWeapon;
                 defaultWeapon.weaponItem.index = items[defaultWeapon.weaponItem.itemType].Count;
-                items[defaultWeapon.weaponItem.itemType].Add(defaultWeapon.weaponItem);
+                Item new_item = new Item();
+                new_item.item = defaultWeapon.weaponItem;
+                new_item.isPicked = defaultWeapon.weaponItem.isPicked;
+                items[defaultWeapon.weaponItem.itemType].Add(new_item);
                 GameObject newWeaponCanvas = Instantiate(weaponItemTypeCanvas.canvasPrefab);
                 newWeaponCanvas.transform.SetParent(weaponsCanvas.transform);
                 if (defaultWeapon.weaponSprite != null)
@@ -142,7 +152,11 @@ public class InventorySystem : MonoBehaviour
                 defaultWeapon.weaponItem.isPicked = defaultWeapon.isDefault;
                 defaultWeapon.weaponItem.itemType = InventoryItem.ItemType.kItemTypeWeapon;
                 defaultWeapon.weaponItem.index = index;
-                items[defaultWeapon.weaponItem.itemType][index] = defaultWeapon.weaponItem;
+
+                Item new_item = new Item();
+                new_item.item = defaultWeapon.weaponItem;
+                new_item.isPicked = items[defaultWeapon.weaponItem.itemType][index].isPicked;
+                items[defaultWeapon.weaponItem.itemType][index] = new_item;
 
                 GameObject newWeaponCanvas = Instantiate(weaponItemTypeCanvas.canvasPrefab);
                 newWeaponCanvas.transform.SetParent(weaponsCanvas.transform);
@@ -180,11 +194,11 @@ public class InventorySystem : MonoBehaviour
 
         List<InventoryItem> queriedItems = new List<InventoryItem>();
 
-        foreach (KeyValuePair<InventoryItem.ItemType, List<InventoryItem>> inventoryItems in items)
+        foreach (KeyValuePair<InventoryItem.ItemType, List<Item>> inventoryItems in items)
         {
-            foreach (InventoryItem iteratingItem in inventoryItems.Value)
+            foreach (Item iteratingItem in inventoryItems.Value)
             {
-                queriedItems.Add(iteratingItem);
+                queriedItems.Add(iteratingItem.item);
             }
         }
 
@@ -195,13 +209,13 @@ public class InventorySystem : MonoBehaviour
     {
         List<InventoryItem> queriedItems = new List<InventoryItem>();
 
-        foreach (KeyValuePair<InventoryItem.ItemType, List<InventoryItem>> inventoryItems in items)
+        foreach (KeyValuePair<InventoryItem.ItemType, List<Item>> inventoryItems in items)
         {
-            foreach (InventoryItem iteratingItem in inventoryItems.Value)
+            foreach (Item iteratingItem in inventoryItems.Value)
             {
                 if (iteratingItem.isPicked)
                 {
-                    queriedItems.Add(iteratingItem);
+                    queriedItems.Add(iteratingItem.item);
                 }
             }
         }
@@ -210,7 +224,7 @@ public class InventorySystem : MonoBehaviour
 
     }
 
-    public List<InventoryItem> GetInventoryItemsByType(InventoryItem.ItemType queriedType)
+    public List<Item> GetInventoryItemsByType(InventoryItem.ItemType queriedType)
     {
         return items[queriedType];
     }
@@ -220,7 +234,7 @@ public class InventorySystem : MonoBehaviour
         if (!items.ContainsKey(itemType)) { return null; }
         if (itemIndex >= items[itemType].Count) { return null; }
 
-        return items[itemType][itemIndex];
+        return items[itemType][itemIndex].item;
     }
 
     public void GrabItem(InventoryItem newItem)
@@ -230,7 +244,10 @@ public class InventorySystem : MonoBehaviour
             Weapon w = newItem.gameObject.GetComponent<Weapon>();
             if (w)
             {
-                items[newItem.itemType][(int)w.weaponType].isPicked = true;
+                items[newItem.itemType][(int)w.weaponType].item.isPicked = true;
+                Item editing_item = items[newItem.itemType][(int)w.weaponType];
+                editing_item.isPicked = true;
+                items[newItem.itemType][(int)w.weaponType] = editing_item;
                 weaponImages[(int)w.weaponType].Selectable.color = weaponItemTypeCanvas.pickedColor;
                 return;
             }
@@ -240,7 +257,11 @@ public class InventorySystem : MonoBehaviour
             newItem.isPicked = true;
             return;
         }
-        items[newItem.itemType].Add(newItem);
+        Item item = new Item();
+        item.item = newItem;
+        item.isPicked = true;
+
+        items[newItem.itemType].Add(item);
         newItem.index = items[newItem.itemType].Count - 1;
     }
 
@@ -248,7 +269,11 @@ public class InventorySystem : MonoBehaviour
     {
         deletedItem.index = -1;
         deletedItem.isPicked = false;
-        items[deletedItem.itemType].Remove(deletedItem);
+
+        Item itemToDelete = new Item();
+        itemToDelete.item = deletedItem;
+        itemToDelete.isPicked = true;
+        items[deletedItem.itemType].Remove(itemToDelete);
     }
 
     public void Clear()
@@ -272,12 +297,12 @@ public class InventorySystem : MonoBehaviour
     public void Awake()
     {
 
-        items = new Dictionary<InventoryItem.ItemType, List<InventoryItem>>();
+        items = new Dictionary<InventoryItem.ItemType, List<Item>>();
 
         InventoryItem.ItemType[] itemTypes = System.Enum.GetValues(typeof(InventoryItem.ItemType)) as InventoryItem.ItemType[];
         for (int i = 0; i < itemTypes.Length; i++)
         {
-            items.Add(itemTypes[i], new List<InventoryItem>());
+            items.Add(itemTypes[i], new List<Item>());
         }
 
         if (canvas == null)

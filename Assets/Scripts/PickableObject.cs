@@ -14,6 +14,7 @@ public class PickableObject : InventoryItem {
   }
   public KeyNumber KeyTag;
   public float RotateSpeed = 50.0f;
+  public float RotateSpeed = 50.0f;
   public float HealAmount = 30.0f;
   public float ArmorAmount = 30.0f;
   public float JumpForceAmount = 0.2f;
@@ -130,6 +131,7 @@ public class PickableObject : InventoryItem {
               Inventory.GrabItem(this);
               gameObject.GetComponent<BoxCollider>().enabled = false;
               gameObject.transform.GetChild(0).gameObject.SetActive(false);
+              
             }break;
         }
       }

@@ -27,10 +27,10 @@ public class BasicProjectile : MonoBehaviour {
 
   void OnCollisionEnter(Collision collision) {
     if(collision.gameObject.tag == "Projectile") return;
-    if(collision.gameObject.tag == "Enemy") {
-      HealthComponent enemy = collision.gameObject.GetComponent<HealthComponent>();
-      if(enemy) {
-        enemy.TakeDamage(Damage);
+    if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player") {
+      HealthComponent character = collision.gameObject.GetComponent<HealthComponent>();
+      if(character) {
+        character.TakeDamage(Damage);
       }
     }
     Destroy(gameObject);

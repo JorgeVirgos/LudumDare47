@@ -105,6 +105,7 @@ MonoBehaviour:
   ReloadSound: {fileID: 0}
   EmptyClipSound: {fileID: 0}
   ReloadOffset: {x: 0, y: 0, z: 0}
+  ReloadRotation: {x: 0, y: 0, z: 0}
   ReloadTime: 0
   ReloadCurve:
     serializedVersion: 2
@@ -112,6 +113,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  MinShootPitch: 1
+  MaxShootPitch: 1.5
   NumberOfPellets: 0
   DispersionAngle: 0
   DispersionDistance: 0

@@ -32,7 +32,7 @@ public class Pistol : Weapon {
         if(prj) {
           CurrentShootingTime = 0.0f;
           prj.Damage = WeaponDamage;
-          prj.Direction = transform.forward;
+          prj.Direction = transform.parent.forward;
           prj.ImpulseDirection = transform.parent.transform.forward;
         }
         CurrentShotCooldown = ShotCooldown;
